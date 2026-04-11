@@ -10,7 +10,7 @@ Au lieu de lire des articles scientifiques complexes, les utilisateurs peuvent o
 
 > Un assistant intelligent qui montre et explique comment de minuscules modifications des protéines peuvent affecter la vie au niveau moléculaire.
 
-//------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------------------------------------------------------------
 
 ## Comment ça marche ?
 
@@ -77,7 +77,7 @@ Cet outil aide les utilisateurs à :
 * **comprendre** leur impact
 * **prendre des décisions plus rapides et éclairées**
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//-------------------------------------------------------------------------------------------------------------------------------------------
 
 ## Comment atteindre 14 points ou plus ?
 
@@ -139,7 +139,7 @@ no ideas
 
 # 30 pts !!!!
 
-//----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//-------------------------------------------------------------------------------------------------------------------------------------------------------
 
 ## Comment mener le projet ?
 
@@ -215,3 +215,97 @@ Semaines 7-8 Sécurité, validation des entrées, DevOps mineur, configuration D
 Semaines 8-9 Tests, correction de bugs, optimisation des performances
 
 Semaine 10 Finalisation, README, justifications des modules, préparation de la démo
+
+//-------------------------------------------------------------------------------------------------------------
+
+## Comment faire pour le LLM ?
+
+### Restrictions des LLM
+
+RPM	Requests per minute --> pas trop limitant, source de latence
+RPD	Requests per day --> limitant ⚠️
+TPM	Tokens per minute --> --> pas trop limitant, source de latence
+TPD Tokens per days --> limitant ⚠️
+
+### Utilisation estimée 
+
+Supposons large:
+
+Petite équipe / démo : 10 à 20 utilisateurs
+100 requêtes par jours 
+
+### Estimation taille d'une requête
+
+Prompt (instructions + mutation) : 200 à 500 tokens
+Contexte (RAG) : 500 à 2 000 tokens
+Résultat (explication) : 200 à 600 tokens
+
+Total par requête : 1000 à 3000 tokens soit 
+
+### Ressources requises pour le projet 
+
+300000 tokens par jour
+100 requêtes par jours
+3000 tokens par minutes si on veut 1 requête par minute
+1 requête par minute
+
+### options 1 : utiliser le tier gratuit d'une API 
+
+Exemple Groq (!!! ⚠️ Pas Grok d'Elon Musk https://groq.com/blog/hey-elon-its-time-to-cease-de-grok ⚠️ !!!)
+
+<p align="center">
+  <img src="Groq_free_tier_limits.png" alt="Groq" width="700">
+</p>
+
+Modele llama-3.1-8b-instant :
+30 requêtes par minutes
+14.4K requêtes par jours 	
+6K tokens par minutes -- > 2 requêtes par minutes
+500K tokens par jours --> 166 requêtes de 3000 tokens par jours
+
+Le plan gratuit de groq devrait suffire.
+
+### options 2 : essayer de faire tourner un LLM en local sur un des ordi de 42
+
+⚠️ Je ne sais pas du tout si c'est possible ⚠️
+
+⚠️ Il doit y avoir une raison deployer un LLM n'est pas proposer par le sujet ⚠️
+
+Configuration recommandée
+
+RAM : 16 à 32 Go
+Processeur : performant (i5/i7/Ryzen)
+Carte graphique : optionnelle (améliore considérablement les performances)
+
+Cela permettrait d'executer : Modèles 7B à 8B (Llama, Mistral. Deepseek ?)
+
+Temps de réponse : 2 à 6 secondes
+Raisonnement moyen mais bon
+
+Ressouce d'un ordi en F6
+
+<p align="center">
+  <img src="42_computer.png" alt="42" width="700">
+</p>
+
+Cela me parait un peu limite, en plus des histoires de permissions et de migrations Fedora.
+
+Mais si nous y parvenons : + 2 pts en IA pour le deployment d'un LLM
+
+### options 3 : essayer de faire tourner un LLM sur le Cloud
+
+Y a probablement des tiers gratuits d'AWS ou Azure ou GCP qui nous permettrait d'y faire tourner notre LLM plutot que sur les ordis de 42. Dans ce cas, le probleme serait les restrictions du fournisseurs cloud plutot que de l'API LLM.
+
+Je n'y connais pas grand chose. Si l'une de vous s'y connais ou a des credits cloud ??? 
+
+Mais si nous y parvenons : 
+
++ 2 pts en IA pour le deployment d'un LLM
++ 2++ pts en cloud
+Cela ferra bien sur vos CV/portefollio
+
+### Recommandation : 
+
+Utiliser une API groq ou equivalent (option 1).
+
+Options 2 et 3 si vous voulez de la prise de risques et viser 50 pts pour transcendance

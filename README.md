@@ -1,4 +1,4 @@
-# FT_TRANSENDENCE
+# FT_TRANSCENDENCE
 
 *This project has been created as part of the 42 curriculum by mlaurent, jdu, lifan, yren*
 
