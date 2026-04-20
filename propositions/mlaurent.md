@@ -17,7 +17,7 @@ Au lieu de lire des articles scientifiques complexes, les utilisateurs peuvent o
 L'application utilise :
 
 * Les données de structure des protéines de la base de données AlphaFold
-* Des modèles d'IA (dont de grands modèles de langage)
+* Des modèles d'IA (LLM)
 * Des règles scientifiques simples sur le comportement des protéines
 
 Elle combine tous ces éléments pour **analyser et expliquer automatiquement les mutations**.
