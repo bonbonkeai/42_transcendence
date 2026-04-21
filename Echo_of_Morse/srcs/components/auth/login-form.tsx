@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { FormEvent, useState } from "react";
 
 type LoginFormData = {
@@ -49,15 +50,6 @@ export default function LoginForm() {
 
     try {
       setIsSubmitting(true);
-
-      // TODO:
-      // Replace this mock request with your real login API route.
-      // Example:
-      // const response = await fetch("/api/login", {
-      //   method: "POST",
-      //   headers: { "Content-Type": "application/json" },
-      //   body: JSON.stringify(formData),
-      // });
 
       await new Promise((resolve) => setTimeout(resolve, 600));
 
@@ -175,6 +167,29 @@ export default function LoginForm() {
           {isSubmitting ? "Submitting..." : "Login"}
         </button>
       </form>
+
+      <p
+        style={{
+          marginTop: "20px",
+          marginBottom: 0,
+          fontSize: "14px",
+          lineHeight: 1.6,
+          color: "#4b5563",
+          textAlign: "center",
+        }}
+      >
+        Don&apos;t have an account?{" "}
+        <Link
+          href="/register"
+          style={{
+            color: "#111827",
+            fontWeight: 700,
+            textDecoration: "none",
+          }}
+        >
+          Register here
+        </Link>
+      </p>
     </section>
   );
 }

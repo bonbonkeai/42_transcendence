@@ -1,7 +1,6 @@
 import PageShell from "@/components/layout/page-shell";
-import MorsePlayer from "@/components/learning/MorsePlayer";
 
-export default function LearningPage() {
+export default function CompetitionPage() {
   return (
     <main id="main-content">
       <PageShell>
@@ -21,21 +20,19 @@ export default function LearningPage() {
               color: "#111827",
             }}
           >
-            Learning
+            Competition
           </h1>
 
           <p
             style={{
               fontSize: "16px",
               lineHeight: 1.8,
-              margin: "0 0 24px 0",
-              color: "#0d0d0d",
+              margin: 0,
+              color: "#4b5563",
             }}
           >
-            Practice Morse code and improve your decoding skills.
+            This page will contain competition modes and performance challenges.
           </p>
-
-          <MorsePlayer />
         </section>
       </PageShell>
     </main>

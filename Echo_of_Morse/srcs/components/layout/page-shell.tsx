@@ -1,4 +1,6 @@
-import type { ReactNode } from "react"
+import { ReactNode } from "react"
+import Footer from "@/components/layout/footer"
+import Navbar from "@/components/layout/navbar"
 
 type PageShellProps = {
   children: ReactNode
@@ -6,8 +8,16 @@ type PageShellProps = {
 
 export default function PageShell({ children }: PageShellProps) {
   return (
-    <main style={{ padding: "24px", maxWidth: "960px", margin: "0 auto" }}>
+    <div
+      style={{
+        maxWidth: "1180px",
+        margin: "0 auto",
+        padding: "0 24px 56px 24px",
+      }}
+    >
+      <Navbar />
       {children}
-    </main>
-  );
+      <Footer />
+    </div>
+  )
 }

@@ -1,21 +1,22 @@
 import "./globals.css"
-import type { ReactNode } from "react"
-import Navbar from "@/components/layout/navbar"
-import Footer from "@/components/layout/footer"
-import SkipToContent from "@/components/layout/skip-to-content"
 
-type RootLayoutProps = {
-  children: ReactNode
+export const metadata = {
+  title: "Echoes of Morse",
+  description: "Learn, communicate, and compete through Morse code.",
 }
 
-export default function RootLayout({ children }: RootLayoutProps) {
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode
+}) {
   return (
     <html lang="en">
       <body>
-        <SkipToContent />
-        <Navbar />
+        <a href="#main-content" className="skip-link">
+          Skip to main content
+        </a>
         {children}
-        <Footer />
       </body>
     </html>
   )
