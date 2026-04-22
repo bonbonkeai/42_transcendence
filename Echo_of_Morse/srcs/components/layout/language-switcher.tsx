@@ -4,8 +4,8 @@ import { useState } from "react"
 
 const buttonStyle = (active: boolean) => ({
   background: "transparent",
-  border: "1px solid #eceae8",
-  color: active ? "#fcfbf5" : "#fcfbf5",
+  border: "1px solid #0d0d0d",
+  color: active ? "#0d0d0d" : "#0d0d0d",
   padding: "6px 10px",
   borderRadius: "8px",
   cursor: "pointer",

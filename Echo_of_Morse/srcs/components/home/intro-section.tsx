@@ -17,7 +17,7 @@ export default function IntroSection() {
           color: "#111827",
         }}
       >
-        Un Project of Morse?
+        A Project of Morse?
       </h2>
       <p
         style={{

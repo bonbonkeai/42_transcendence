@@ -3,7 +3,7 @@ import LanguageSwitcher from "@/components/layout/language-switcher"
 
 const navLinkStyle = {
   textDecoration: "none",
-  color: "#fcfbf5",
+  color: "#0d0d0d",
   fontSize: "15px",
   fontWeight: 600,
   padding: "6px 0",
@@ -18,7 +18,7 @@ export default function Navbar() {
         alignItems: "center",
         gap: "24px",
         padding: "20px 0 16px 0",
-        borderBottom: "1px solid #e5e7eb",
+        borderBottom: "1px solid #0d0d0d",
         marginBottom: "40px",
       }}
     >
@@ -26,7 +26,7 @@ export default function Navbar() {
         href="/"
         style={{
           textDecoration: "none",
-          color: "#fcfbf5",
+          color: "#0d0d0d",
           fontSize: "28px",
           fontWeight: 800,
           letterSpacing: "-0.02em",
