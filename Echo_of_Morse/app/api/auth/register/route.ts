@@ -2,7 +2,7 @@
 // NextResponse = la réponse http apres next
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/server/prisma";
-import bcrypt from "bcrypt";
+import bcrypt from "bcryptjs";
 
 export async function POST(req: NextRequest) {
   try {

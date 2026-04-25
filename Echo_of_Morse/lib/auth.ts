@@ -6,6 +6,7 @@ import GitHubProvider from "next-auth/providers/github";
 import bcrypt from "bcryptjs";
 import { prisma } from "@/server/prisma";
 
+//configurer les options pour NextAuth
 export const authOptions: NextAuthOptions = {
 
 	//============================ key = adapter ============================
@@ -20,7 +21,7 @@ export const authOptions: NextAuthOptions = {
 		CredentialsProvider({
 			name: "credentials", //façon de se connecter
 			credentials: {		//champ necessaire du form
-				//! a verifier avec bonbon (label)
+				//! a verifier bonbon (label)
 				email: { label: "Email", type: "email" }, //label = texte affiche pour le champ
 				password: { label: "Password", type: "password" },
 			},
@@ -130,6 +131,7 @@ export const authOptions: NextAuthOptions = {
 		//pour ajouter id dans session.user
 		async session({ session, token }) {
 			if (session.user) {
+				//! a verifier type de id
 				//{ id?: string } = un objet(session.user) qui peut avoir id, et si elle existe, elle doit etre string
 				(session.user as { id?: string }).id = token.id as string;
 			}
@@ -140,8 +142,9 @@ export const authOptions: NextAuthOptions = {
 	//============================ key = pages ============================
 	// personnalise les pages utilisees par NextAuth
 	pages: {
-		signIn: "/auth/signin",
-		error: "/auth/error",
+		//! a verifier avec bonbon
+		signIn: "/login",	//page de connexion
+		error: "/error",	//page d’erreur
 	},
 
 	//============================ key = secret ============================
