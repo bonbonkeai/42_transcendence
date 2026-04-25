@@ -1,36 +1,30 @@
-export default function OnlineCounter() {
-  return (
-    <section
-      style={{
-        padding: "28px 24px",
-        border: "1px solid #e5e7eb",
-        borderRadius: "16px",
-        background: "#ffffff",
-        marginBottom: "20px",
-      }}
-    >
-      <h2
-        style={{
-          fontSize: "28px",
-          fontWeight: 700,
-          margin: "0 0 12px 0",
-          color: "#111827",
-        }}
-      >
-        Online now
-      </h2>
+import { unstable_noStore as noStore } from "next/cache";
 
-      <p
-        style={{
-          fontSize: "18px",
-          lineHeight: 1.7,
-          margin: 0,
-          color: "#4b5563",
-        }}
-      >
-        n users connected
-      </p>
+import { prisma } from "@/server/prisma";
+import styles from "./home.module.css";
+
+export default async function OnlineCounter() {
+  noStore();
+
+  let onlineCount = 0;
+
+  try {
+    const [{ count }] = await prisma.$queryRaw<Array<{ count: bigint }>>`
+      SELECT COUNT(DISTINCT "userId") AS count
+      FROM "Progress"
+    `;
+
+    onlineCount = Number(count);
+  } catch {
+    onlineCount = 0;
+  }
+
+  return (
+    <section className={styles.sectionCard}>
+      <h2 className={styles.sectionTitle}>Online now</h2>
+
+      <p className={styles.onlineText}>{onlineCount} users connected</p>
     </section>
-  )
+  );
 }
 //need to access the real data of the database
