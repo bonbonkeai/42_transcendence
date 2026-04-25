@@ -10,6 +10,11 @@ services:
     depends_on:
       - db
 
+  ws:
+    build: ./ws-server
+    ports:
+      - "3001:3001"
+
   db:
     image: postgres:15
     restart: always
