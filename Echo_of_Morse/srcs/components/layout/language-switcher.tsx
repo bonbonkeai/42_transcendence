@@ -1,37 +1,17 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-
-const buttonStyle = (active: boolean) => ({
-  background: "transparent",
-  border: "1px solid #0d0d0d",
-  color: active ? "#0d0d0d" : "#0d0d0d",
-  padding: "6px 10px",
-  borderRadius: "8px",
-  cursor: "pointer",
-  fontSize: "12px",
-  fontWeight: 700,
-  textTransform: "uppercase" as const,
-  letterSpacing: "0.04em",
-  opacity: active ? 1 : 0.8,
-})
+import { useState } from "react";
+import styles from "./language-switcher.module.css";
 
 export default function LanguageSwitcher() {
-  const [language, setLanguage] = useState("en")
+  const [language, setLanguage] = useState("en");
 
   return (
-    <div
-      style={{
-        display: "flex",
-        alignItems: "center",
-        gap: "8px",
-      }}
-      aria-label="Language switcher"
-    >
+    <div className={styles.switcher} aria-label="Language switcher">
       <button
         type="button"
         onClick={() => setLanguage("en")}
-        style={buttonStyle(language === "en")}
+        className={`${styles.button} ${language === "en" ? styles.active : ""}`}
       >
         EN
       </button>
@@ -39,7 +19,7 @@ export default function LanguageSwitcher() {
       <button
         type="button"
         onClick={() => setLanguage("fr")}
-        style={buttonStyle(language === "fr")}
+        className={`${styles.button} ${language === "fr" ? styles.active : ""}`}
       >
         FR
       </button>
@@ -47,10 +27,10 @@ export default function LanguageSwitcher() {
       <button
         type="button"
         onClick={() => setLanguage("zh")}
-        style={buttonStyle(language === "zh")}
+        className={`${styles.button} ${language === "zh" ? styles.active : ""}`}
       >
         中文
       </button>
     </div>
-  )
+  );
 }

@@ -1,13 +1,8 @@
 "use client";
 
 import { FormEvent, useState } from "react";
-
-type RegisterFormData = {
-  username: string;
-  email: string;
-  password: string;
-  confirmPassword: string;
-};
+import styles from "./register-form.module.css";
+import type { RegisterFormData } from "@/components/types/auth";
 
 export default function RegisterForm() {
   const [formData, setFormData] = useState<RegisterFormData>({
@@ -58,6 +53,7 @@ export default function RegisterForm() {
     setSuccess("");
 
     const validationError = validateForm();
+
     if (validationError) {
       setError(validationError);
       return;
@@ -97,126 +93,72 @@ export default function RegisterForm() {
   }
 
   return (
-    <section
-      style={{
-        width: "100%",
-        maxWidth: "480px",
-        margin: "0 auto",
-        padding: "24px",
-        border: "1px solid #e5e7eb",
-        borderRadius: "16px",
-        backgroundColor: "#ffffff",
-        boxShadow: "0 4px 16px rgba(0, 0, 0, 0.06)",
-      }}
-    >
-      <h1
-        style={{
-          margin: "0 0 8px 0",
-          fontSize: "28px",
-          fontWeight: 700,
-        }}
-      >
-        Register
-      </h1>
+    <section className={styles.card}>
+      <h1 className={styles.title}>Register</h1>
 
-      <p
-        style={{
-          margin: "0 0 24px 0",
-          color: "#4b5563",
-          lineHeight: 1.6,
-        }}
-      >
+      <p className={styles.description}>
         Create your account to access the platform.
       </p>
 
       <form onSubmit={handleSubmit}>
-        <div style={{ display: "grid", gap: "16px" }}>
-          <label style={{ display: "grid", gap: "8px" }}>
+        <div className={styles.fields}>
+          <label className={styles.field}>
             <span>Username</span>
             <input
+              className={styles.input}
               type="text"
               value={formData.username}
               onChange={(event) => updateField("username", event.target.value)}
               placeholder="Enter your username"
-              style={inputStyle}
             />
           </label>
 
-          <label style={{ display: "grid", gap: "8px" }}>
+          <label className={styles.field}>
             <span>Email</span>
             <input
+              className={styles.input}
               type="email"
               value={formData.email}
               onChange={(event) => updateField("email", event.target.value)}
               placeholder="Enter your email"
-              style={inputStyle}
             />
           </label>
 
-          <label style={{ display: "grid", gap: "8px" }}>
+          <label className={styles.field}>
             <span>Password</span>
             <input
+              className={styles.input}
               type="password"
               value={formData.password}
               onChange={(event) => updateField("password", event.target.value)}
               placeholder="Enter your password"
-              style={inputStyle}
             />
           </label>
 
-          <label style={{ display: "grid", gap: "8px" }}>
+          <label className={styles.field}>
             <span>Confirm Password</span>
             <input
+              className={styles.input}
               type="password"
               value={formData.confirmPassword}
               onChange={(event) =>
                 updateField("confirmPassword", event.target.value)
               }
               placeholder="Confirm your password"
-              style={inputStyle}
             />
           </label>
         </div>
 
-        {error ? (
-          <p
-            style={{
-              marginTop: "16px",
-              color: "#b91c1c",
-              lineHeight: 1.5,
-            }}
-          >
-            {error}
-          </p>
-        ) : null}
+        {error ? <p className={styles.error}>{error}</p> : null}
 
-        {success ? (
-          <p
-            style={{
-              marginTop: "16px",
-              color: "#166534",
-              lineHeight: 1.5,
-            }}
-          >
-            {success}
-          </p>
-        ) : null}
+        {success ? <p className={styles.success}>{success}</p> : null}
 
         <button
           type="submit"
           disabled={isSubmitting}
-          style={{
-            marginTop: "20px",
-            width: "100%",
-            padding: "12px 16px",
-            border: "none",
-            borderRadius: "10px",
-            backgroundColor: isSubmitting ? "#9ca3af" : "#111827",
-            color: "#ffffff",
-            fontSize: "16px",
-            fontWeight: 600,
-            cursor: isSubmitting ? "not-allowed" : "pointer",
-          }}
+          className={`${styles.submitButton} ${
+            isSubmitting ? styles.submitButtonDisabled : ""
+          }`}
         >
           {isSubmitting ? "Submitting..." : "Create account"}
         </button>
@@ -225,11 +167,160 @@ export default function RegisterForm() {
   );
 }
 
-const inputStyle = {
-  width: "100%",
-  padding: "12px 14px",
-  border: "1px solid #d1d5db",
-  borderRadius: "10px",
-  fontSize: "14px",
-  outline: "none",
-} as const;
+//si on comfirme API:
+// "use client";
+
+// import type { RegisterFormData } from "@/components/types/auth";
+// import { registerUser } from "@/lib/api/auth";
+// import { FormEvent, useState } from "react";
+// import styles from "./register-form.module.css";
+
+// export default function RegisterForm() {
+//   const [formData, setFormData] = useState<RegisterFormData>({
+//     username: "",
+//     email: "",
+//     password: "",
+//     confirmPassword: "",
+//   });
+
+//   const [error, setError] = useState("");
+//   const [success, setSuccess] = useState("");
+//   const [isSubmitting, setIsSubmitting] = useState(false);
+
+//   function updateField(field: keyof RegisterFormData, value: string) {
+//     setFormData((prev) => ({
+//       ...prev,
+//       [field]: value,
+//     }));
+//   }
+
+//   function validateForm() {
+//     if (!formData.username.trim()) {
+//       return "Username is required.";
+//     }
+
+//     if (!formData.email.trim()) {
+//       return "Email is required.";
+//     }
+
+//     if (!formData.password) {
+//       return "Password is required.";
+//     }
+
+//     if (formData.password.length < 6) {
+//       return "Password must be at least 6 characters long.";
+//     }
+
+//     if (formData.password !== formData.confirmPassword) {
+//       return "Passwords do not match.";
+//     }
+
+//     return "";
+//   }
+
+//   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
+//     event.preventDefault();
+//     setError("");
+//     setSuccess("");
+
+//     const validationError = validateForm();
+
+//     if (validationError) {
+//       setError(validationError);
+//       return;
+//     }
+
+//     try {
+//       setIsSubmitting(true);
+
+//       await registerUser(formData);
+
+//       setSuccess("Registration form submitted successfully.");
+//       setFormData({
+//         username: "",
+//         email: "",
+//         password: "",
+//         confirmPassword: "",
+//       });
+//     } catch (submitError) {
+//       console.error(submitError);
+//       setError("Something went wrong during registration.");
+//     } finally {
+//       setIsSubmitting(false);
+//     }
+//   }
+
+//   return (
+//     <section className={styles.card}>
+//       <h1 className={styles.title}>Register</h1>
+
+//       <p className={styles.description}>
+//         Create your account to access the platform.
+//       </p>
+
+//       <form onSubmit={handleSubmit}>
+//         <div className={styles.fields}>
+//           <label className={styles.field}>
+//             <span>Username</span>
+//             <input
+//               className={styles.input}
+//               type="text"
+//               value={formData.username}
+//               onChange={(event) => updateField("username", event.target.value)}
+//               placeholder="Enter your username"
+//             />
+//           </label>
+
+//           <label className={styles.field}>
+//             <span>Email</span>
+//             <input
+//               className={styles.input}
+//               type="email"
+//               value={formData.email}
+//               onChange={(event) => updateField("email", event.target.value)}
+//               placeholder="Enter your email"
+//             />
+//           </label>
+
+//           <label className={styles.field}>
+//             <span>Password</span>
+//             <input
+//               className={styles.input}
+//               type="password"
+//               value={formData.password}
+//               onChange={(event) => updateField("password", event.target.value)}
+//               placeholder="Enter your password"
+//             />
+//           </label>
+
+//           <label className={styles.field}>
+//             <span>Confirm Password</span>
+//             <input
+//               className={styles.input}
+//               type="password"
+//               value={formData.confirmPassword}
+//               onChange={(event) =>
+//                 updateField("confirmPassword", event.target.value)
+//               }
+//               placeholder="Confirm your password"
+//             />
+//           </label>
+//         </div>
+
+//         {error ? <p className={styles.error}>{error}</p> : null}
+
+//         {success ? <p className={styles.success}>{success}</p> : null}
+
+//         <button
+//           type="submit"
+//           disabled={isSubmitting}
+//           className={`${styles.submitButton} ${
+//             isSubmitting ? styles.submitButtonDisabled : ""
+//           }`}
+//         >
+//           {isSubmitting ? "Submitting..." : "Create account"}
+//         </button>
+//       </form>
+//     </section>
+//   );
+// }

@@ -1,62 +1,29 @@
-import Link from "next/link"
-import LanguageSwitcher from "@/components/layout/language-switcher"
-
-const navLinkStyle = {
-  textDecoration: "none",
-  color: "#0d0d0d",
-  fontSize: "15px",
-  fontWeight: 600,
-  padding: "6px 0",
-}
+import Link from "next/link";
+import LanguageSwitcher from "@/components/layout/language-switcher";
+import styles from "./navbar.module.css";
 
 export default function Navbar() {
   return (
-    <header
-      style={{
-        display: "flex",
-        justifyContent: "space-between",
-        alignItems: "center",
-        gap: "24px",
-        padding: "20px 0 16px 0",
-        borderBottom: "1px solid #0d0d0d",
-        marginBottom: "40px",
-      }}
-    >
-      <Link
-        href="/"
-        style={{
-          textDecoration: "none",
-          color: "#0d0d0d",
-          fontSize: "28px",
-          fontWeight: 800,
-          letterSpacing: "-0.02em",
-        }}
-      >
+    <header className={styles.header}>
+      <Link href="/" className={styles.logo}>
         Echoes of Morse
       </Link>
 
-      <nav
-        aria-label="Main navigation"
-        style={{
-          display: "flex",
-          alignItems: "center",
-          gap: "24px",
-          flexWrap: "wrap",
-        }}
-      >
-        <Link href="/dashboard" style={navLinkStyle}>
+      <nav className={styles.nav} aria-label="Main navigation">
+        <Link href="/dashboard" className={styles.navLink}>
           Dashboard
         </Link>
-        <Link href="/profile" style={navLinkStyle}>
+
+        <Link href="/profile" className={styles.navLink}>
           Profile
         </Link>
-        <Link href="/login" style={navLinkStyle}>
+
+        <Link href="/login" className={styles.navLink}>
           Login
         </Link>
 
         <LanguageSwitcher />
-
       </nav>
     </header>
-  )
+  );
 }

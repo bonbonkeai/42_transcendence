@@ -3,6 +3,7 @@
 import { useMemo, useState } from "react";
 import { encode } from "@/lib/morse";
 import { playMorse } from "@/lib/audio";
+import styles from "./MorsePlayer.module.css";
 
 export default function MorsePlayer() {
   const [text, setText] = useState("");
@@ -25,67 +26,26 @@ export default function MorsePlayer() {
     }
   }
 
+  const isDisabled = !text.trim() || isPlaying;
+
   return (
-    <section className="panel">
-      <div style={{ display: "grid", gap: "16px" }}>
-        <label style={{ display: "grid", gap: "8px" }}>
-          <span
-            style={{
-              fontSize: "14px",
-              fontWeight: 700,
-              color: "#101010",
-              textTransform: "uppercase",
-              letterSpacing: "0.04em",
-            }}
-          >
-            Input Message
-          </span>
+    <section className={styles.panel}>
+      <div className={styles.content}>
+        <label className={styles.field}>
+          <span className={styles.label}>Input Message</span>
 
           <input
+            className={styles.input}
             value={text}
-            onChange={(e) => setText(e.target.value)}
+            onChange={(event) => setText(event.target.value)}
             placeholder="Enter text"
-            style={{
-              width: "100%",
-              padding: "12px 14px",
-              border: "1px solid #fffcf9",
-              borderRadius: "10px",
-              background: "#101010",
-              color: "#fffcf9",
-              fontSize: "15px",
-              outline: "none",
-            }}
           />
         </label>
 
         <div>
-          <p
-            style={{
-              margin: "0 0 8px 0",
-              fontSize: "14px",
-              fontWeight: 700,
-              color: "#101010",
-              textTransform: "uppercase",
-              letterSpacing: "0.04em",
-            }}
-          >
-            Encoded Morse
-          </p>
+          <p className={styles.label}>Encoded Morse</p>
 
-          <div
-            style={{
-              minHeight: "52px",
-              padding: "12px 14px",
-              border: "1px solid #101010",
-              borderRadius: "10px",
-              background: "#101010",
-              color: "#fffcf9",
-              fontSize: "15px",
-              lineHeight: 1.7,
-              whiteSpace: "pre-wrap",
-              wordBreak: "break-word",
-            }}
-          >
+          <div className={styles.output}>
             {morse || "No transmission yet."}
           </div>
         </div>
@@ -93,20 +53,8 @@ export default function MorsePlayer() {
         <button
           type="button"
           onClick={handlePlay}
-          disabled={!text.trim() || isPlaying}
-          style={{
-            width: "fit-content",
-            padding: "12px 18px",
-            border: "1px solid #101010",
-            borderRadius: "10px",
-            background: !text.trim() || isPlaying ? "#101010" : "#101010",
-            color: "#fffcf9",
-            fontSize: "14px",
-            fontWeight: 800,
-            textTransform: "uppercase",
-            letterSpacing: "0.04em",
-            cursor: !text.trim() || isPlaying ? "not-allowed" : "pointer",
-          }}
+          disabled={isDisabled}
+          className={`${styles.button} ${isDisabled ? styles.buttonDisabled : ""}`}
         >
           {isPlaying ? "Transmitting..." : "Play Morse"}
         </button>

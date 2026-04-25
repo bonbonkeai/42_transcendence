@@ -1,37 +1,15 @@
 import PageShell from "@/components/layout/page-shell";
 import MorsePlayer from "@/components/learning/MorsePlayer";
+import styles from "./learning.module.css";
 
 export default function LearningPage() {
   return (
     <main id="main-content">
       <PageShell>
-        <section
-          style={{
-            padding: "32px 24px",
-            border: "1px solid #e5e7eb",
-            borderRadius: "16px",
-            background: "#ffffff",
-          }}
-        >
-          <h1
-            style={{
-              fontSize: "36px",
-              fontWeight: 800,
-              margin: "0 0 16px 0",
-              color: "#111827",
-            }}
-          >
-            Learning
-          </h1>
+        <section className={styles.learningPanel}>
+          <h1 className={styles.title}>Learning</h1>
 
-          <p
-            style={{
-              fontSize: "16px",
-              lineHeight: 1.8,
-              margin: "0 0 24px 0",
-              color: "#0d0d0d",
-            }}
-          >
+          <p className={styles.description}>
             Practice Morse code and improve your decoding skills.
           </p>
 

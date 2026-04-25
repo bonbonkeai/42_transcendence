@@ -1,12 +1,9 @@
 "use client";
 
+import type { LoginFormData } from "@/components/types/auth";
 import Link from "next/link";
 import { FormEvent, useState } from "react";
-
-type LoginFormData = {
-  email: string;
-  password: string;
-};
+import styles from "./login-form.module.css";
 
 export default function LoginForm() {
   const [formData, setFormData] = useState<LoginFormData>({
@@ -43,6 +40,7 @@ export default function LoginForm() {
     setSuccess("");
 
     const validationError = validateForm();
+
     if (validationError) {
       setError(validationError);
       return;
@@ -67,126 +65,56 @@ export default function LoginForm() {
   }
 
   return (
-    <section
-      style={{
-        width: "100%",
-        maxWidth: "480px",
-        margin: "0 auto",
-        padding: "24px",
-        border: "1px solid #e5e7eb",
-        borderRadius: "16px",
-        backgroundColor: "#ffffff",
-        boxShadow: "0 4px 16px rgba(0, 0, 0, 0.06)",
-      }}
-    >
-      <h1
-        style={{
-          margin: "0 0 8px 0",
-          fontSize: "28px",
-          fontWeight: 700,
-        }}
-      >
-        Login
-      </h1>
+    <section className={styles.card}>
+      <h1 className={styles.title}>Login</h1>
 
-      <p
-        style={{
-          margin: "0 0 24px 0",
-          color: "#4b5563",
-          lineHeight: 1.6,
-        }}
-      >
+      <p className={styles.description}>
         Sign in to continue to your account.
       </p>
 
       <form onSubmit={handleSubmit}>
-        <div style={{ display: "grid", gap: "16px" }}>
-          <label style={{ display: "grid", gap: "8px" }}>
+        <div className={styles.fields}>
+          <label className={styles.field}>
             <span>Email</span>
             <input
+              className={styles.input}
               type="email"
               value={formData.email}
               onChange={(event) => updateField("email", event.target.value)}
               placeholder="Enter your email"
-              style={inputStyle}
             />
           </label>
 
-          <label style={{ display: "grid", gap: "8px" }}>
+          <label className={styles.field}>
             <span>Password</span>
             <input
+              className={styles.input}
               type="password"
               value={formData.password}
               onChange={(event) => updateField("password", event.target.value)}
               placeholder="Enter your password"
-              style={inputStyle}
             />
           </label>
         </div>
 
-        {error ? (
-          <p
-            style={{
-              marginTop: "16px",
-              color: "#b91c1c",
-              lineHeight: 1.5,
-            }}
-          >
-            {error}
-          </p>
-        ) : null}
+        {error ? <p className={styles.error}>{error}</p> : null}
 
-        {success ? (
-          <p
-            style={{
-              marginTop: "16px",
-              color: "#166534",
-              lineHeight: 1.5,
-            }}
-          >
-            {success}
-          </p>
-        ) : null}
+        {success ? <p className={styles.success}>{success}</p> : null}
 
         <button
+          className={`${styles.submitButton} ${
+            isSubmitting ? styles.submitButtonDisabled : ""
+          }`}
           type="submit"
           disabled={isSubmitting}
-          style={{
-            marginTop: "20px",
-            width: "100%",
-            padding: "12px 16px",
-            border: "none",
-            borderRadius: "10px",
-            backgroundColor: isSubmitting ? "#9ca3af" : "#111827",
-            color: "#ffffff",
-            fontSize: "16px",
-            fontWeight: 600,
-            cursor: isSubmitting ? "not-allowed" : "pointer",
-          }}
         >
           {isSubmitting ? "Submitting..." : "Login"}
         </button>
       </form>
 
-      <p
-        style={{
-          marginTop: "20px",
-          marginBottom: 0,
-          fontSize: "14px",
-          lineHeight: 1.6,
-          color: "#4b5563",
-          textAlign: "center",
-        }}
-      >
+      <p className={styles.registerText}>
         Don&apos;t have an account?{" "}
-        <Link
-          href="/register"
-          style={{
-            color: "#111827",
-            fontWeight: 700,
-            textDecoration: "none",
-          }}
-        >
+        <Link className={styles.registerLink} href="/register">
           Register here
         </Link>
       </p>
@@ -194,11 +122,130 @@ export default function LoginForm() {
   );
 }
 
-const inputStyle = {
-  width: "100%",
-  padding: "12px 14px",
-  border: "1px solid #d1d5db",
-  borderRadius: "10px",
-  fontSize: "14px",
-  outline: "none",
-} as const;
+
+
+//si on comfirme API :import { loginUser } from "@/lib/api/auth";
+// "use client";
+
+// import type { LoginFormData } from "@/components/types/auth";
+// import { loginUser } from "@/lib/api/auth";
+// import Link from "next/link";
+// import { FormEvent, useState } from "react";
+// import styles from "./login-form.module.css";
+
+// export default function LoginForm() {
+//   const [formData, setFormData] = useState<LoginFormData>({
+//     email: "",
+//     password: "",
+//   });
+
+//   const [error, setError] = useState("");
+//   const [success, setSuccess] = useState("");
+//   const [isSubmitting, setIsSubmitting] = useState(false);
+
+//   function updateField(field: keyof LoginFormData, value: string) {
+//     setFormData((prev) => ({
+//       ...prev,
+//       [field]: value,
+//     }));
+//   }
+
+//   function validateForm() {
+//     if (!formData.email.trim()) {
+//       return "Email is required.";
+//     }
+
+//     if (!formData.password) {
+//       return "Password is required.";
+//     }
+
+//     return "";
+//   }
+
+//   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
+//     event.preventDefault();
+//     setError("");
+//     setSuccess("");
+
+//     const validationError = validateForm();
+
+//     if (validationError) {
+//       setError(validationError);
+//       return;
+//     }
+
+//     try {
+//       setIsSubmitting(true);
+
+//       await loginUser(formData);
+
+//       setSuccess("Login form submitted successfully.");
+//       setFormData({
+//         email: "",
+//         password: "",
+//       });
+//     } catch (submitError) {
+//       console.error(submitError);
+//       setError("Something went wrong during login.");
+//     } finally {
+//       setIsSubmitting(false);
+//     }
+//   }
+
+//   return (
+//     <section className={styles.card}>
+//       <h1 className={styles.title}>Login</h1>
+
+//       <p className={styles.description}>
+//         Sign in to continue to your account.
+//       </p>
+
+//       <form onSubmit={handleSubmit}>
+//         <div className={styles.fields}>
+//           <label className={styles.field}>
+//             <span>Email</span>
+//             <input
+//               className={styles.input}
+//               type="email"
+//               value={formData.email}
+//               onChange={(event) => updateField("email", event.target.value)}
+//               placeholder="Enter your email"
+//             />
+//           </label>
+
+//           <label className={styles.field}>
+//             <span>Password</span>
+//             <input
+//               className={styles.input}
+//               type="password"
+//               value={formData.password}
+//               onChange={(event) => updateField("password", event.target.value)}
+//               placeholder="Enter your password"
+//             />
+//           </label>
+//         </div>
+
+//         {error ? <p className={styles.error}>{error}</p> : null}
+
+//         {success ? <p className={styles.success}>{success}</p> : null}
+
+//         <button
+//           className={`${styles.submitButton} ${
+//             isSubmitting ? styles.submitButtonDisabled : ""
+//           }`}
+//           type="submit"
+//           disabled={isSubmitting}
+//         >
+//           {isSubmitting ? "Submitting..." : "Login"}
+//         </button>
+//       </form>
+
+//       <p className={styles.registerText}>
+//         Don&apos;t have an account?{" "}
+//         <Link className={styles.registerLink} href="/register">
+//           Register here
+//         </Link>
+//       </p>
+//     </section>
+//   );
+// }
