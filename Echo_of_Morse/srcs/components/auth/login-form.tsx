@@ -49,7 +49,11 @@ export default function LoginForm() {
     try {
       setIsSubmitting(true);
 
+      // ! yren: connect this login form to auth. 
+      // If we keep NextAuth, this should probably use signIn("credentials", { email, password }).
+      
       await new Promise((resolve) => setTimeout(resolve, 600));
+      
 
       setSuccess("Login form submitted successfully.");
       setFormData({
