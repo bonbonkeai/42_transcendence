@@ -9,7 +9,7 @@ export async function POST(req: NextRequest) {
   try {
 
 	//1. obtenir les donnes
-    const { name, email, password } = await req.json();
+    const { name, email, password, confirmPassword } = await req.json();
 
 	//2. verifie si email ou password est manquant
     if (!email || !password) {
@@ -19,7 +19,11 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: "Name required" }, { status: 400 });
     }
 
-	//3. le mot de passe contient moins de 8 caractères
+	//3. check password et confirmPassword sont identiques et password a au moins 8 caracteres
+	if (password !== confirmPassword) {
+      return NextResponse.json({ error: "Passwords do not match" }, { status: 400 });
+    }
+
     if (password.length < 8) {
       return NextResponse.json({ error: "Password must be at least 8 characters" }, { status: 400 });
     }
