@@ -1,6 +1,6 @@
 "use client";
 
-import type { LoginFormData } from "@/components/types/auth";
+import type { LoginFormData } from "@/types/auth";
 import Link from "next/link";
 import { FormEvent, useState } from "react";
 import styles from "./login-form.module.css";

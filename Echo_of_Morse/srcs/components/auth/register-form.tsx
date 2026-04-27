@@ -2,7 +2,7 @@
 
 import { FormEvent, useState } from "react";
 import styles from "./register-form.module.css";
-import type { RegisterFormData } from "@/components/types/auth";
+import type { RegisterFormData } from "@/types/auth";
 
 export default function RegisterForm() {
   const [formData, setFormData] = useState<RegisterFormData>({
