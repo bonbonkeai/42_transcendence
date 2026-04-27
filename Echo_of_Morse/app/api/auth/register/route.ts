@@ -4,6 +4,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/server/prisma";
 import bcrypt from "bcryptjs";
 
+//* Objectif : route POST pour inscrire un utilisateur
 export async function POST(req: NextRequest) {
   try {
 

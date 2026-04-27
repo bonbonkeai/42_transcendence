@@ -6,7 +6,7 @@ import GitHubProvider from "next-auth/providers/github";
 import bcrypt from "bcryptjs";
 import { prisma } from "@/server/prisma";
 
-//configurer les options pour NextAuth
+//* Objectif : configurer les options pour NextAuth
 export const authOptions: NextAuthOptions = {
 
 	//============================ key = adapter ============================
