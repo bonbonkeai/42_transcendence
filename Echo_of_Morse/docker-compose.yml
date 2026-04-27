@@ -1,0 +1,47 @@
+# Docker Compose configuration for Transcendence project
+# Architecture: Browser -> localhost:3000 -> Next.js container -> db:5432 -> PostgreSQL container
+
+services:
+
+# PostgreSQL database container
+# We will move the envs to a .env at the end of the project
+  db:
+    image: postgres:15
+    container_name: transcendence_db
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgresMdp
+      POSTGRES_DB: transcendence
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - transcendence_network
+
+# Next.js application container
+# context: .. to goback to root
+  web:
+    build: 
+      context: ..
+      dockerfile: docker/Dockerfile
+    container_name: transcendence_web
+    restart: always
+    ports:
+      - "3000:3000"
+    environment:
+      DATABASE_URL: "postgresql://postgres:postgresMdp@db:5432/transcendence"
+    depends_on:
+      - db
+    networks:
+      - transcendence_network
+
+# Named volume to persist PostgreSQL data
+volumes:
+  postgres_data:
+
+# Internal network for app <-> db communication
+networks:
+  transcendence_network:
+    driver: bridge

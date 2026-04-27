@@ -1,0 +1,32 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 24px;
+  padding: 20px 0 16px 0;
+  border-bottom: 1px solid #0d0d0d;
+  margin-bottom: 40px;
+}
+
+.logo {
+  text-decoration: none;
+  color: #0d0d0d;
+  font-size: 28px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+
+.navLink {
+  text-decoration: none;
+  color: #0d0d0d;
+  font-size: 15px;
+  font-weight: 600;
+  padding: 6px 0;
+}

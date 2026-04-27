@@ -1,0 +1,46 @@
+// tell prisma to generate the client, with which we can request data.
+generator client {
+  provider = "prisma-client"
+  output   = "../app/generated/prisma"
+}
+
+// which db to use
+datasource db {
+  provider = "postgresql"
+}
+
+// account main info
+model User {
+  id            Int       @id @default(autoincrement())
+  username      String    @unique
+  email         String    @unique
+  passwordHash  String
+  avatarUrl     String?
+  isOnline      Boolean   @default(false)
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  sentRequests     Friendship[] @relation("SentRequests")
+  receivedRequests Friendship[] @relation("ReceivedRequests")
+}
+
+// An independent table to save relationships
+// The sender/receiver Id is the second key, of User table.
+model Friendship {
+  id        Int              @id @default(autoincrement())
+  status    FriendshipStatus @default(PENDING)
+  createdAt DateTime         @default(now())
+
+  senderId   Int
+  sender     User @relation("SentRequests", fields: [senderId], references: [id])
+  receiverId Int
+  receiver   User @relation("ReceivedRequests", fields: [receiverId], references: [id])
+
+  @@unique([senderId, receiverId])
+}
+
+enum FriendshipStatus {
+  PENDING
+  ACCEPTED
+  BLOCKED
+}
