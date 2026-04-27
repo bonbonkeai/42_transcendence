@@ -21,9 +21,8 @@ export const authOptions: NextAuthOptions = {
 		CredentialsProvider({
 			name: "credentials", //façon de se connecter
 			credentials: {		//champ necessaire du form
-				//! a verifier bonbon (label)
-				email: { label: "Email", type: "email" }, //label = texte affiche pour le champ
-				password: { label: "Password", type: "password" },
+				email: { type: "email" }, 
+				password: { type: "password" },
 			},
 			//verifier puis retourner les info d'user si c'est correcte
 			async authorize(credentials) {
@@ -142,9 +141,7 @@ export const authOptions: NextAuthOptions = {
 	//============================ key = pages ============================
 	// personnalise les pages utilisees par NextAuth
 	pages: {
-		//! a verifier avec bonbon
 		signIn: "/login",	//page de connexion
-		error: "/error",	//page d’erreur
 	},
 
 	//============================ key = secret ============================
