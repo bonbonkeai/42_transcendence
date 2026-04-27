@@ -32,4 +32,9 @@ logs:
 rebuild:
 	docker compose -f docker-compose.dev.yml up -d --build
 
+# reset the environment
+re:
+	docker compose -f docker-compose.dev.yml down -v
+	docker compose -f docker-compose.dev.yml up -d --build
+
 .PHONY: dev dev-logs down up stop ps logs rebuild

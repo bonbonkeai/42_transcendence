@@ -11,18 +11,70 @@ datasource db {
 
 // account main info
 model User {
-  id            Int       @id @default(autoincrement())
+  id            String    @id @default(cuid())
+
   username      String    @unique
   email         String    @unique
   passwordHash  String
-  avatarUrl     String?
+
+  image         String?
   isOnline      Boolean   @default(false)
+  lastSeen      DateTime?    
+
   createdAt     DateTime  @default(now())
   updatedAt     DateTime  @updatedAt
+
+  accounts      Account[]
+  sessions      Session[]
 
   sentRequests     Friendship[] @relation("SentRequests")
   receivedRequests Friendship[] @relation("ReceivedRequests")
 }
+
+
+// OAuth account
+model Account {
+  id                 String  @id @default(cuid())
+  userId             String
+  type               String
+  provider           String
+  providerAccountId  String
+
+  refresh_token      String?
+  access_token       String?
+  expires_at         Int?
+  token_type         String?
+  scope              String?
+  id_token           String?
+  session_state      String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+}
+
+
+//unsed, we use the JWT mode.
+// who is login: user login -> server creat session -> browser save cookie
+// Request with cookie -> server find session -> find userId
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+// forget passeword, magic link
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
+}
+
 
 // An independent table to save relationships
 // The sender/receiver Id is the second key, of User table.
@@ -31,9 +83,10 @@ model Friendship {
   status    FriendshipStatus @default(PENDING)
   createdAt DateTime         @default(now())
 
-  senderId   Int
+  senderId   String
   sender     User @relation("SentRequests", fields: [senderId], references: [id])
-  receiverId Int
+
+  receiverId String
   receiver   User @relation("ReceivedRequests", fields: [receiverId], references: [id])
 
   @@unique([senderId, receiverId])
