@@ -3,11 +3,18 @@
 // It allows users to send friend requests and retrieve their friend list.
 
 import { NextRequest, NextResponse } from 'next/server'
+import { getServerSession } from 'next-auth'
+import { authOptions } from '../../../lib/auth'
 import { prisma } from '../../../lib/db'
 
 // GET /api/friends?userId=123 - Get friend list of a user
 export async function GET(request: NextRequest) {
   try {
+    const session = await getServerSession(authOptions)
+    if (!session) {
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+    }
+
     const { searchParams } = new URL(request.url)
     const userId = searchParams.get('userId')
 
@@ -48,12 +55,20 @@ export async function GET(request: NextRequest) {
 // POST /api/friends - Send a friend request
 export async function POST(request: NextRequest) {
   try {
-    const body = await request.json()
-    const { senderId, receiverId } = body
+    const session = await getServerSession(authOptions)
+    if (!session) {
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+    }
 
-    if (!senderId || !receiverId) {
+    const body = await request.json()
+    const { receiverId } = body
+
+    // senderId 从 session 取，防止伪造
+    const senderId = session.user.id
+
+    if (!receiverId) {
       return NextResponse.json(
-        { error: 'senderId and receiverId are required' },
+        { error: 'receiverId is required' },
         { status: 400 }
       )
     }

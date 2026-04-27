@@ -7,15 +7,25 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { prisma } from '../../../../lib/db'
 
+//! With NextAuth
+import { getServerSession } from 'next-auth'
+import { authOptions } from '../../../../lib/auth'
 
 // GET /api/users/[id] - get user information
 export async function GET(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
+    const session = await getServerSession(authOptions)
+    if (!session) {
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+    }
+
+    const { id } = await params
+
     const user = await prisma.user.findUnique({
-      where: { id: parseInt(params.id) },
+      where: { id: parseInt(id) },
       select: {
         id: true,
         username: true,
@@ -43,21 +53,30 @@ export async function GET(
   }
 }
 
-
-
 // PUT /api/users/[id] - Update user information (avatar, email)
+// verify it's a exit account, and the id is the same with the one to be changed. 
 export async function PUT(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
+    const session = await getServerSession(authOptions)
+    if (!session) {
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+    }
+    const { id } = await params
+    const userId = parseInt(id)
+    if (session.user.id !== userId) {
+      return NextResponse.json({ error: 'Forbidden' }, { status: 403 })
+    }
+
     // Get the data from the request body
     const body = await request.json()
     const { email, avatarUrl } = body
 
     // Update the user in the database
     const updatedUser = await prisma.user.update({
-      where: { id: parseInt(params.id) },
+      where: { id: userId },
       data: {
         ...(email && { email }),
         ...(avatarUrl && { avatarUrl }),
