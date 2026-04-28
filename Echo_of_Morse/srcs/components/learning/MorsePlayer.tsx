@@ -1,6 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import { Button } from "@/components/ui";
 import { encode } from "@/lib/morse";
 import { playMorse } from "@/lib/audio";
 import styles from "./MorsePlayer.module.css";
@@ -50,14 +51,14 @@ export default function MorsePlayer() {
           </div>
         </div>
 
-        <button
+        <Button
           type="button"
           onClick={handlePlay}
           disabled={isDisabled}
-          className={`${styles.button} ${isDisabled ? styles.buttonDisabled : ""}`}
+          className={styles.playButton}
         >
           {isPlaying ? "Transmitting..." : "Play Morse"}
-        </button>
+        </Button>
       </div>
     </section>
   );
