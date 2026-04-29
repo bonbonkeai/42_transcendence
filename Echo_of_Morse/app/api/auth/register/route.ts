@@ -8,7 +8,11 @@ export async function POST(req: NextRequest) {
   try {
 
 	//1. obtenir les donnes
+<<<<<<< HEAD
     const { name, email, password, confirmPassword } = await req.json();
+=======
+    const { name, email, password } = await req.json();
+>>>>>>> origin/jdu_frontend
 
 	//2. verifie si email ou password est manquant
     if (!email || !password) {
@@ -19,10 +23,13 @@ export async function POST(req: NextRequest) {
     }
 
 	//3. le mot de passe contient moins de 8 caractères
+<<<<<<< HEAD
 	if (password !== confirmPassword) {
 		return NextResponse.json({ error: "Passwords do not match" }, { status: 400 });
 	}
 
+=======
+>>>>>>> origin/jdu_frontend
     if (password.length < 8) {
       return NextResponse.json({ error: "Password must be at least 8 characters" }, { status: 400 });
     }

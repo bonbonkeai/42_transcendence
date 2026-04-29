@@ -1,0 +1,23 @@
+.switcher {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.button {
+  background: transparent;
+  border: 1px solid #0d0d0d;
+  color: #0d0d0d;
+  padding: 6px 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  opacity: 0.8;
+}
+
+.active {
+  opacity: 1;
+}
