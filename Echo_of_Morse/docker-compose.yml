@@ -37,6 +37,11 @@ services:
     networks:
       - transcendence_network
 
+  ws:
+    build: ./ws-server
+    ports:
+      - "3001:3001"
+
 # Named volume to persist PostgreSQL data
 volumes:
   postgres_data:

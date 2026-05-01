@@ -38,6 +38,12 @@ services:
     networks:
       - transcendence_network
 
+
+  ws:
+    build: ./ws-server
+    ports:
+      - "3001:3001"
+
 volumes:
   postgres_data_dev:
 
