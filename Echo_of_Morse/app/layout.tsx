@@ -1,4 +1,5 @@
 import "./globals.css"
+import { I18nProvider } from "@/lib/i18n";
 
 export const metadata = {
   title: "Echoes of Morse",
@@ -13,10 +14,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
+		<I18nProvider>
         <a href="#main-content" className="skip-link">
           Skip to main content
         </a>
         {children}
+		</I18nProvider>
       </body>
     </html>
   )

@@ -1,10 +1,10 @@
 "use client";
 
-import { useState } from "react";
+import { useI18n } from "@/lib/i18n";
 import styles from "./language-switcher.module.css";
 
 export default function LanguageSwitcher() {
-  const [language, setLanguage] = useState("en");
+  const { language, setLanguage } = useI18n();
 
   return (
     <div className={styles.switcher} aria-label="Language switcher">
