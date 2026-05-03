@@ -99,11 +99,3 @@ export async function PUT(
     )
   }
 }
-
-//interface to update online users.
-export async function GET() {
-  const count = await prisma.user.count({
-    where: { isOnline: true }
-  });
-  return NextResponse.json({ count });
-}

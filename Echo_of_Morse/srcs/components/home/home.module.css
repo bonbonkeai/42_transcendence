@@ -1,0 +1,31 @@
+.sectionBlock {
+  margin-bottom: 20px;
+}
+
+.sectionTitle {
+  font-size: 28px;
+  font-weight: 700;
+  margin: 0 0 12px 0;
+  color: #111827;
+}
+
+.sectionText {
+  font-size: 16px;
+  line-height: 1.8;
+  margin: 0;
+  color: #4b5563;
+}
+
+.sectionTextWithMargin {
+  font-size: 16px;
+  line-height: 1.8;
+  margin: 0 0 16px 0;
+  color: #4b5563;
+}
+
+.onlineText {
+  font-size: 18px;
+  line-height: 1.7;
+  margin: 0;
+  color: #4b5563;
+}
