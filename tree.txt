@@ -1,0 +1,143 @@
+.
+├── CYBERSECURITY.md
+├── Echo_of_Morse
+│   ├── Makefile
+│   ├── README.md
+│   ├── app
+│   │   ├── api
+│   │   │   ├── auth
+│   │   │   │   ├── [...nextauth]
+│   │   │   │   │   └── route.ts
+│   │   │   │   └── register
+│   │   │   │       └── route.ts
+│   │   │   ├── friends
+│   │   │   │   ├── [id]
+│   │   │   │   │   ├── route.ts
+│   │   │   │   │   └── route.ts:Zone.Identifier
+│   │   │   │   ├── route.ts
+│   │   │   │   └── route.ts:Zone.Identifier
+│   │   │   └── users
+│   │   │       └── [id]
+│   │   │           ├── route.ts
+│   │   │           └── route.ts:Zone.Identifier
+│   │   ├── chat
+│   │   │   ├── chat.module.css
+│   │   │   └── page.tsx
+│   │   ├── competition
+│   │   │   ├── competition.module.css
+│   │   │   └── page.tsx
+│   │   ├── dashboard
+│   │   │   └── page.tsx
+│   │   ├── favicon.ico
+│   │   ├── globals.css
+│   │   ├── layout.tsx
+│   │   ├── learning
+│   │   │   ├── learning.module.css
+│   │   │   └── page.tsx
+│   │   ├── login
+│   │   │   └── page.tsx
+│   │   ├── page.tsx
+│   │   ├── privacy-policy
+│   │   │   └── page.tsx
+│   │   ├── profile
+│   │   │   └── page.tsx
+│   │   ├── register
+│   │   │   └── page.tsx
+│   │   └── terms-of-service
+│   │       └── page.tsx
+│   ├── docker
+│   │   ├── Dockerfile
+│   │   └── Dockerfile.dev
+│   ├── docker-compose.dev.yml
+│   ├── docker-compose.yml
+│   ├── eslint.config.mjs
+│   ├── instrumentation.js
+│   ├── next.config.mjs
+│   ├── package-lock.json
+│   ├── package.json
+│   ├── postcss.config.mjs
+│   ├── prisma
+│   │   ├── migrations
+│   │   │   ├── 20260426151203_init
+│   │   │   │   └── migration.sql
+│   │   │   ├── 20260426153935_make_password_required
+│   │   │   │   └── migration.sql
+│   │   │   └── migration_lock.toml
+│   │   └── schema.prisma
+│   ├── prisma.config.ts
+│   ├── public
+│   │   ├── file.svg
+│   │   ├── globe.svg
+│   │   ├── next.svg
+│   │   ├── vercel.svg
+│   │   └── window.svg
+│   ├── srcs
+│   │   ├── components
+│   │   │   ├── auth
+│   │   │   │   ├── login-form.module.css
+│   │   │   │   ├── login-form.tsx
+│   │   │   │   ├── register-form.module.css
+│   │   │   │   └── register-form.tsx
+│   │   │   ├── chat
+│   │   │   │   └── a_confirme
+│   │   │   ├── competition
+│   │   │   │   └── a_confirme
+│   │   │   ├── dashboard
+│   │   │   │   ├── dashboard-grid.tsx
+│   │   │   │   └── dashboard.module.css
+│   │   │   ├── home
+│   │   │   │   ├── history-morse.tsx
+│   │   │   │   ├── home.module.css
+│   │   │   │   ├── intro-section.tsx
+│   │   │   │   └── online-counter.tsx
+│   │   │   ├── layout
+│   │   │   │   ├── footer.module.css
+│   │   │   │   ├── footer.tsx
+│   │   │   │   ├── language-switcher.module.css
+│   │   │   │   ├── language-switcher.tsx
+│   │   │   │   ├── navbar.module.css
+│   │   │   │   ├── navbar.tsx
+│   │   │   │   └── page-shell.tsx
+│   │   │   ├── learning
+│   │   │   │   ├── MorsePlayer.module.css
+│   │   │   │   └── MorsePlayer.tsx
+│   │   │   ├── profile
+│   │   │   │   └── a_confirme
+│   │   │   └── ui
+│   │   │       ├── button.module.css
+│   │   │       ├── button.tsx
+│   │   │       ├── card.module.css
+│   │   │       ├── card.tsx
+│   │   │       ├── index.ts
+│   │   │       ├── input.module.css
+│   │   │       └── input.tsx
+│   │   ├── config
+│   │   │   └── a_confirme
+│   │   ├── lib
+│   │   │   ├── api
+│   │   │   │   └── auth.ts
+│   │   │   ├── audio.ts
+│   │   │   ├── auth.ts
+│   │   │   ├── i18n
+│   │   │   │   └── a_confirme
+│   │   │   ├── morse.ts
+│   │   │   └── vaultClient.js
+│   │   ├── server
+│   │   │   └── prisma.ts
+│   │   └── types
+│   │       └── auth.ts
+│   ├── tsconfig.json
+│   ├── vault
+│   │   ├── config
+│   │   │   └── local.json
+│   │   └── scripts
+│   │       └── vault-unseal.sh
+│   └── ws-server
+│       ├── Dockerfile
+│       ├── package.json
+│       └── server.js
+├── Makefile
+├── README.md
+└── tree.txt
+
+46 directories, 94 files
