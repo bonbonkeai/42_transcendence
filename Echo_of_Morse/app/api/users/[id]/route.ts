@@ -5,11 +5,11 @@
 // Example: GET /api/users/123 will return the information of user with id 123.
 
 import { NextRequest, NextResponse } from 'next/server'
-import { prisma } from '../../../../lib/db'
+import { prisma } from '@/server/prisma'
 
 //! With NextAuth
 import { getServerSession } from 'next-auth'
-import { authOptions } from '../../../../lib/auth'
+import { authOptions } from '@/lib/auth'
 
 // GET /api/users/[id] - get user information
 export async function GET(
@@ -98,4 +98,12 @@ export async function PUT(
       { status: 500 }
     )
   }
+}
+
+// update online account
+export async function GET() {
+  const count = await prisma.user.count({
+    where: { isOnline: true }
+  });
+  return NextResponse.json({ count });
 }

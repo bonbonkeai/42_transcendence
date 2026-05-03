@@ -9,18 +9,28 @@ export default async function OnlineCounter() {
 
   let onlineCount = 0;
 
-  try {
-    // ! yren: replace this temporary query with the real online user count
-    // ! after auth / session / user online status is confirmed.
-    const [{ count }] = await prisma.$queryRaw<Array<{ count: bigint }>>`
-      SELECT COUNT(DISTINCT "userId") AS count
-      FROM "Progress"
-    `;
 
-    onlineCount = Number(count);
+//lifan: check the isOnline of the User. 
+  try {
+    onlineCount = await prisma.user.count({
+      where: { isOnline: true }
+    });
   } catch {
     onlineCount = 0;
   }
+
+  // try {
+  //   // ! yren: replace this temporary query with the real online user count
+  //   // ! after auth / session / user online status is confirmed.
+  //   const [{ count }] = await prisma.$queryRaw<Array<{ count: bigint }>>`
+  //     SELECT COUNT(DISTINCT "userId") AS count
+  //     FROM "Progress"
+  //   `;
+
+  //   onlineCount = Number(count);
+  // } catch {
+  //   onlineCount = 0;
+  // }
 
   return (
     <Card className={styles.sectionBlock}>

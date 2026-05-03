@@ -1,4 +1,6 @@
 import "./globals.css"
+// TODO: Marc — importer SocketProvider ici
+// import SocketProvider from "@/components/layout/socket-provider";
 
 export const metadata = {
   title: "Echoes of Morse",
