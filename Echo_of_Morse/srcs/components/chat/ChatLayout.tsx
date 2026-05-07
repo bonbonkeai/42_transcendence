@@ -189,11 +189,7 @@ export default function ChatLayout() {
   }
 
   function handleSendFriendRequest(user: SearchableUser): boolean {
-    const trimmedUsername = user.username.trim();
-
-    const alreadyFriend = friends.some(
-      (friend) => friend.username.trim() === trimmedUsername
-    );
+    const alreadyFriend = friends.some((friend) => friend.id === user.id);
 
     if (alreadyFriend) {
       window.alert("This user is already in your friend list.");
