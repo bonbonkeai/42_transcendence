@@ -113,3 +113,5 @@ export default function LoginForm() {
     </Card>
   );
 }
+
+// ! i18n: move login form titles, descriptions, labels, placeholders, validation messages, success/error messages, and links into the i18n dictionary.

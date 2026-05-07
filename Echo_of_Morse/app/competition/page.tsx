@@ -17,3 +17,5 @@ export default function CompetitionPage() {
     </main>
   );
 }
+
+// ! i18n: move competition page title and placeholder description into the i18n dictionary.

@@ -10,7 +10,7 @@ export default async function OnlineCounter() {
   let onlineCount = 0;
 
   try {
-    // ! yren: replace this temporary query with the real online user count
+    // ! yren: replace this temporary query with the real global online user count
     // ! after auth / session / user online status is confirmed.
     const [{ count }] = await prisma.$queryRaw<Array<{ count: bigint }>>`
       SELECT COUNT(DISTINCT "userId") AS count
@@ -26,8 +26,11 @@ export default async function OnlineCounter() {
     <Card className={styles.sectionBlock}>
       <h2 className={styles.sectionTitle}>Online now</h2>
 
-      {/* ! yren: display the real number of online users here */}
+      {/* //! yren: display the real global online user count here */}
       <p className={styles.onlineText}>{onlineCount} users connected</p>
     </Card>
   );
 }
+
+// ! i18n: move home page titles, descriptive paragraphs, online-user labels, empty states, buttons, and alert messages into the i18n dictionary.
+// ! i18n: keep dynamic values such as onlineCount and displayName as interpolation variables.

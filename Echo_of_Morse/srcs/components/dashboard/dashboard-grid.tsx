@@ -111,3 +111,6 @@ export default function DashboardGrid() {
     </section>
   );
 }
+
+// ! i18n: move dashboard card titles, descriptions, progress labels, and unit labels into the i18n dictionary.
+// ! i18n: keep numeric progress values dynamic and only translate surrounding labels such as "days".

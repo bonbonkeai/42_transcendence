@@ -63,3 +63,6 @@ export default function MorsePlayer() {
     </section>
   );
 }
+
+// ! i18n: move learning page title, description, input label, placeholder, output empty state, and button states into the i18n dictionary.
+// ! i18n: do not translate the generated Morse output itself.
