@@ -10,7 +10,7 @@ type ChatHeaderProps = {
 };
 
 export default function ChatHeader({ friend, onCloseChat }: ChatHeaderProps) {
-  // ! yren: confirm final public user profile route.
+  // ! Liyuan: confirm final public user profile route.
   // Current temporary route: /users/[userId].
   const profileHref = `/users/${friend.id}`;
 
@@ -45,7 +45,7 @@ export default function ChatHeader({ friend, onCloseChat }: ChatHeaderProps) {
           </Link>
 
           <div className={styles.profilePreview}>
-            {/* //! yren: replace this friend preview with real friend profile data from auth/database */}
+            {/* //! Liyuan: replace this friend preview with real friend profile data from auth/database */}
             <div className={styles.previewHeader}>
               {friend.avatarUrl ? (
                 <img

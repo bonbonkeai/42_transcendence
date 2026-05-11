@@ -53,7 +53,7 @@ export default function UserProfilePage({ params }: UserProfilePageProps) {
                 {friend.isOnline ? "Online" : "Offline"}
               </p>
 
-              {/* //! yren: replace this mock friend profile with real user profile data from auth/database */}
+              {/* //! Liyuan: replace this mock friend profile with real user profile data from auth/database */}
               <p className={styles.description}>
                 This is a temporary public user profile page. Later, this page
                 should display the real user profile from the database.

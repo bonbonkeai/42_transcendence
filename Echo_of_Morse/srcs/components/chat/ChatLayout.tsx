@@ -27,7 +27,7 @@ import { transformChatMessage } from "@/lib/chat-transform";
 import styles from "./css/ChatLayout.module.css";
 
 export default function ChatLayout() {
-// ! yren: replace mockFriends with friends loaded from the real database.
+// ! Liyuan: replace mockFriends with friends loaded from the real database.
 // ! Expected backend data: current user's friend list, including friendId,
 // ! username, displayName / remarkName, avatarUrl, online status,
 // ! last message preview, and last message time.
@@ -37,7 +37,7 @@ export default function ChatLayout() {
     type: "none",
   });
 
-  // ! yren: replace mockMessages with messages loaded from the real database.
+  // ! Liyuan: replace mockMessages with messages loaded from the real database.
   // ! Expected backend data: messages for the selected conversation or friend.
   const [messages, setMessages] = useState<ChatMessage[]>(mockMessages);
 
@@ -46,11 +46,11 @@ export default function ChatLayout() {
   const [userSearchQuery, setUserSearchQuery] = useState("");
   const [userSearchResults, setUserSearchResults] = useState<SearchableUser[]>([]);
   const [isAddFriendOpen, setIsAddFriendOpen] = useState(false);
-  // ! yren: this is temporary local notification state.
+  // ! Liyuan: this is temporary local notification state.
   // ! Later, system messages should come from a notification API or WebSocket events.
   // ! Expected backend data: notification id, type, title, body, isRead, createdAt.
   const [systemMessages, setSystemMessages] = useState<SystemMessage[]>([]);
-  // ! yren: replace this local pending friend request state with backend data.
+  // ! Liyuan: replace this local pending friend request state with backend data.
   // ! Expected backend data: pending outgoing friend requests for the current user.
   // ! This prevents sending duplicate requests after refresh or from another device.
   const [pendingFriendRequestUserIds, setPendingFriendRequestUserIds] = useState<string[]>([]);
@@ -212,7 +212,7 @@ export default function ChatLayout() {
       return false;
     }
 
-    // ! yren: TODO backend integration.
+    // ! Liyuan: TODO backend integration.
     // ! Add friend should not directly create a friendship.
     // ! It should create a pending friend request first.
     // ! The target user must accept the request before both users become friends.
@@ -244,7 +244,7 @@ export default function ChatLayout() {
 
     const renamedFriend = friends.find((friend) => friend.id === friendId);
 
-    // ! yren: TODO backend integration.
+    // ! Liyuan: TODO backend integration.
     // ! This currently only updates the local displayName.
     // ! Later, this should call a real API endpoint, for example PATCH /api/friends/:friendshipId.
     // ! Backend should persist the remarkName / displayName for the current user.
@@ -267,7 +267,7 @@ export default function ChatLayout() {
   function handleDeleteFriend(friendId: string) {
     const deletedFriend = friends.find((friend) => friend.id === friendId);
 
-    // ! yren: TODO backend integration.
+    // ! Liyuan: TODO backend integration.
     // ! This currently only removes the friend from local React state.
     // ! Later, this should call a real API endpoint, for example DELETE /api/friends/:friendshipId.
     // ! Backend should remove or deactivate the friendship relation in the database.
@@ -320,7 +320,7 @@ export default function ChatLayout() {
       createdAt: getCurrentTime(),
     };
 
-    // ! yren: TODO backend integration.
+    // ! Liyuan: TODO backend integration.
     // ! Share friend should mean sharing a contact card to an existing friend,
     // ! not only copying text to clipboard.
     // ! Later, backend should support a shared_contact message type,
@@ -412,7 +412,7 @@ export default function ChatLayout() {
       createdAt: getCurrentTime(),
     };
 
-    // ! yren: TODO backend integration.
+    // ! Liyuan: TODO backend integration.
     // ! This currently only appends the message to local React state.
     // ! Later, this should call a real API endpoint or WebSocket event.
     // ! Backend should persist the message with senderId, conversationId,

@@ -63,7 +63,7 @@ export default function RegisterForm() {
     try {
       setIsSubmitting(true);
 
-      // ! yren: connect this register form to the real API.
+      // ! Liyuan: connect this register form to the real API.
       // ! after auth / Prisma fields are confirmed.
       // ! Expected fields from front for now: username, email, password.
       // ! Please confirm whether backend expects username or name.
