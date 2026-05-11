@@ -102,6 +102,19 @@ export default function LoginForm() {
         <Button type="submit" disabled={isSubmitting} fullWidth>
           {isSubmitting ? "Submitting..." : "Login"}
         </Button>
+
+        {/* 
+           // ! yren: replace these disabled placeholders with real OAuth login buttons.
+           // ! They should call NextAuth signIn() once the provider config is ready.
+        */}
+
+        <Button type="button" variant="secondary" fullWidth disabled>
+          Continue with Google
+        </Button>
+
+        <Button type="button" variant="secondary" fullWidth disabled>
+          Continue with 42
+        </Button>
       </form>
 
       <p className={styles.registerText}>

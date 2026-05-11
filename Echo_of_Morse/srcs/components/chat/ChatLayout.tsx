@@ -27,8 +27,11 @@ import { transformChatMessage } from "@/lib/chat-transform";
 import styles from "./css/ChatLayout.module.css";
 
 export default function ChatLayout() {
-  // ! yren: replace mockFriends with friends loaded from the real database.
-  // ! Expected backend data: current user's friend list, including username,
+// ! yren: replace mockFriends with friends loaded from the real database.
+// ! Expected backend data: current user's friend list, including friendId,
+// ! username, displayName / remarkName, avatarUrl, online status,
+// ! last message preview, and last message time.
+// ! Online status may later need WebSocket presence updates.
   const [friends, setFriends] = useState<Friend[]>(mockFriends);
   const [currentView, setCurrentView] = useState<ChatPanelView>({
     type: "none",
@@ -43,7 +46,13 @@ export default function ChatLayout() {
   const [userSearchQuery, setUserSearchQuery] = useState("");
   const [userSearchResults, setUserSearchResults] = useState<SearchableUser[]>([]);
   const [isAddFriendOpen, setIsAddFriendOpen] = useState(false);
+  // ! yren: this is temporary local notification state.
+  // ! Later, system messages should come from a notification API or WebSocket events.
+  // ! Expected backend data: notification id, type, title, body, isRead, createdAt.
   const [systemMessages, setSystemMessages] = useState<SystemMessage[]>([]);
+  // ! yren: replace this local pending friend request state with backend data.
+  // ! Expected backend data: pending outgoing friend requests for the current user.
+  // ! This prevents sending duplicate requests after refresh or from another device.
   const [pendingFriendRequestUserIds, setPendingFriendRequestUserIds] = useState<string[]>([]);
 
   // ! game: temporary local state for game invitations.
