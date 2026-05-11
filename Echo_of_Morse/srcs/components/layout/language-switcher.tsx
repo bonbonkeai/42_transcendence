@@ -1,11 +1,11 @@
 "use client";
 
-import { useState } from "react";
+import { useI18n } from "@/lib/i18n";
 import { Button } from "@/components/ui";
 import styles from "./language-switcher.module.css";
 
 export default function LanguageSwitcher() {
-  const [language, setLanguage] = useState("en");
+  const { language, setLanguage } = useI18n();
 
   return (
     <div className={styles.switcher} aria-label="Language switcher">
@@ -41,7 +41,5 @@ export default function LanguageSwitcher() {
     </div>
   );
 }
-
-
 // ! i18n: move all navigation labels, aria-labels, footer links, and footer description into the i18n dictionary.
 // ! i18n: keep the brand name "Echoes of Morse" unchanged unless the team decides to translate the product name.

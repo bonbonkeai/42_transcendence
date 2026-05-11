@@ -24,7 +24,7 @@ function DashboardCard({ title, description, href }: DashboardCardProps) {
   );
 }
 
-// TODO: Replace this mock data with real data from the database.
+// TODO: Liyuan : Replace this mock data with real data from the database.
 function TodayPracticeProgress() {
   const progress: PracticeProgress = {
     completedLessons: 3,
