@@ -1,0 +1,76 @@
+import Link from "next/link";
+import type { MorseLevel, UserLearningProgress } from "@/types/learning";
+import { getLevelStatus } from "@/lib/learning/levelAccess";
+import styles from "@/components/learning/css/Learning.module.css";
+
+type LevelCardProps = {
+  level: MorseLevel;
+  progress: UserLearningProgress;
+};
+
+export default function LevelCard({ level, progress }: LevelCardProps) {
+  const status = getLevelStatus(level.level, progress);
+  const isLocked = status === "locked";
+
+  return (
+    <article
+      className={`${styles.levelCard} ${isLocked ? styles.levelCardLocked : ""}`}
+      aria-labelledby={`level-${level.level}-title`}
+    >
+      <div>
+        <div className={styles.levelTop}>
+          <h3 id={`level-${level.level}-title`} className={styles.levelTitle}>
+            {level.title}
+          </h3>
+
+          <span
+            className={`${styles.statusBadge} ${
+              isLocked ? styles.statusBadgeLocked : ""
+            }`}
+          >
+            {status}
+          </span>
+        </div>
+
+        <div className={styles.characterList} aria-label="New characters">
+          {level.newCharacters.map((character) => (
+            <span className={styles.characterPill} key={character}>
+              {character}
+            </span>
+          ))}
+        </div>
+
+        <dl className={styles.levelMeta}>
+          <div className={styles.metaBox}>
+            <dt className={styles.metaLabel}>Questions</dt>
+            <dd className={styles.metaValue}>{level.questionCount}</dd>
+          </div>
+
+          <div className={styles.metaBox}>
+            <dt className={styles.metaLabel}>Pass</dt>
+            <dd className={styles.metaValue}>{level.passCondition}</dd>
+          </div>
+
+          <div className={styles.metaBox}>
+            <dt className={styles.metaLabel}>Review</dt>
+            <dd className={styles.metaValue}>{level.reviewRatio}</dd>
+          </div>
+        </dl>
+      </div>
+
+      {isLocked ? (
+        <button className={styles.disabledButton} type="button" disabled>
+          Locked
+        </button>
+      ) : (
+        <Link
+          className={styles.primaryButton}
+          href={`/learning/levels/${level.level}/practice`}
+        >
+          Start practice
+        </Link>
+      )}
+    </article>
+  );
+}
+//这里先让卡片直接通往 practice。想保留 Level 详情页，也可以把链接改成：<Link href={`/learning/levels/${level.level}`}>View level</Link>
