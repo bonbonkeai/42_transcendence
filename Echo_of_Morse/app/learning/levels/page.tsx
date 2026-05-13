@@ -18,32 +18,18 @@ export default function LevelsPage() {
 
         <section className={styles.hero} aria-labelledby="levels-title">
           <p className={styles.eyebrow}>Level Directory</p>
+
           <h1 id="levels-title" className={styles.title}>
-            Morse levels
+            Morse Levels
           </h1>
 
           <p className={styles.description}>
-            Each level introduces new characters and reviews previous ones. The
-            practice mode automatically mixes Morse-to-letter and
-            letter-to-Morse questions.
+            Each level uses mixed practice: sometimes you decode Morse signals,
+            sometimes you encode characters with the keyboard.
           </p>
         </section>
 
-        <section className={styles.section} aria-labelledby="all-levels-title">
-          <div className={styles.sectionHeader}>
-            <div>
-              <h2 id="all-levels-title" className={styles.sectionTitle}>
-                All levels
-              </h2>
-              <p className={styles.sectionText}>
-                Locked levels become available after you reach the required
-                accuracy.
-              </p>
-            </div>
-          </div>
-
-          <LevelGrid levels={morseLevels} progress={mockLearningProgress} />
-        </section>
+        <LevelGrid levels={morseLevels} progress={mockLearningProgress} />
       </div>
     </main>
   );

@@ -16,5 +16,6 @@ export type UserLearningProgress = {
   globalAccuracy: number;
   averageReactionTime: number;
   totalSessions: number;
+  todayLearningMinutes: number;
   weakCharacters: string[];
 };

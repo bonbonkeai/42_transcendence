@@ -7,6 +7,7 @@ export const mockLearningProgress: UserLearningProgress = {
   globalAccuracy: 72,
   averageReactionTime: 1.8,
   totalSessions: 12,
+  todayLearningMinutes: 18,
   weakCharacters: ["R", "H", "Q"],
 };
 

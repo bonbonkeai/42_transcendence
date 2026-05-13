@@ -19,9 +19,9 @@ export default function LevelCard({ level, progress }: LevelCardProps) {
     >
       <div>
         <div className={styles.levelTop}>
-          <h3 id={`level-${level.level}-title`} className={styles.levelTitle}>
+          <h2 id={`level-${level.level}-title`} className={styles.levelTitle}>
             {level.title}
-          </h3>
+          </h2>
 
           <span
             className={`${styles.statusBadge} ${
