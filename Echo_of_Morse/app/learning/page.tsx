@@ -1,6 +1,6 @@
 import LearningProgressCard from "@/components/learning/LearningProgressCard";
 import LearningEntryCards from "@/components/learning/LearningEntryCards";
-import { mockLearningProgress } from "@/data/mockLearningProgress";
+import { mockLearningProgress } from "@/components/learning/data/mockLearningProgress";
 import styles from "@/components/learning/css/Learning.module.css";
 
 export default function LearningPage() {

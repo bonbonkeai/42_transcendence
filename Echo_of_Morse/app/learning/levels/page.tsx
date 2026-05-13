@@ -1,6 +1,6 @@
 import Link from "next/link";
-import { morseLevels } from "@/data/morseLevels";
-import { mockLearningProgress } from "@/data/mockLearningProgress";
+import { morseLevels } from "@/components/learning/data/morseLevels";
+import { mockLearningProgress } from "@/components/learning/data/mockLearningProgress";
 import LevelGrid from "@/components/learning/LevelGrid";
 import styles from "@/components/learning/css/Learning.module.css";
 
