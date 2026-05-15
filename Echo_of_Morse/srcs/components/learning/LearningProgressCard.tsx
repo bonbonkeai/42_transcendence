@@ -3,6 +3,7 @@ import styles from "@/components/learning/css/Learning.module.css";
 
 type LearningProgressCardProps = {
   progress: UserLearningProgress;
+  totalLevels: number;
 };
 
 function formatLearningTime(minutes: number): string {
@@ -22,6 +23,7 @@ function formatLearningTime(minutes: number): string {
 
 export default function LearningProgressCard({
   progress,
+  totalLevels,
 }: LearningProgressCardProps) {
   return (
     <section className={styles.progressCard} aria-labelledby="progress-title">
@@ -33,7 +35,7 @@ export default function LearningProgressCard({
         </h2>
 
         <p className={styles.cardText}>
-          You have completed {progress.completedLevels.length} levels.
+          You have completed {progress.completedLevels.length} of {totalLevels} levels.
         </p>
       </div>
 

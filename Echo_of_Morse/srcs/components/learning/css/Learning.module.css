@@ -1,9 +1,9 @@
 .learningPage {
   width: 100%;
-  min-height: 100vh;
-  padding: 48px 24px;
-  color: #111111;
-  background: #f7f7f7;
+  min-height: calc(100vh - 96px);
+  padding: 2px 0 48px;
+  color: var(--foreground);
+  background: var(--background);
 }
 
 .learningContainer {
@@ -12,7 +12,7 @@
 }
 
 .hero {
-  margin-bottom: 28px;
+  margin-bottom: 26px;
 }
 
 .eyebrow {
@@ -199,8 +199,10 @@
 /* Breadcrumb */
 
 .breadcrumb {
-  margin-bottom: 24px;
-  color: #666666;
+  margin-bottom: 10px;
+  color: #111111;
+  font-size: 1rem;
+  font-weight: 650;
 }
 
 .link {
@@ -215,6 +217,7 @@
 
 .breadcrumbCurrent {
   color: #111111;
+  font-weight: 500;
 }
 
 /* Level directory */

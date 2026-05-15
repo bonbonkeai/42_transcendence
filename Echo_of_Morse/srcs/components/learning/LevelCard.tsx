@@ -9,7 +9,14 @@ type LevelCardProps = {
 };
 
 export default function LevelCard({ level, progress }: LevelCardProps) {
+  // TODO_BACKEND: 
+  //! Liyuan: Level status depends on real user progress from the backend.
+  // Required progress fields:
+  // - currentLevel
+  // - unlockedLevels
+  // - completedLevels
   const status = getLevelStatus(level.level, progress);
+
   const isLocked = status === "locked";
 
   return (
@@ -63,14 +70,22 @@ export default function LevelCard({ level, progress }: LevelCardProps) {
           Locked
         </button>
       ) : (
-        <Link
-          className={styles.primaryButton}
-          href={`/learning/levels/${level.level}/practice`}
-        >
-          Start practice
-        </Link>
+        <>
+          {/*
+            TODO_BACKEND / TODO_PRACTICE:
+            //! Liyuan: The practice page should validate that this level is unlocked
+            before starting the session.
+            Route contract:
+            /learning/levels/[levelId]/practice
+          */}
+          <Link
+            className={styles.primaryButton}
+            href={`/learning/levels/${level.level}/practice`}
+          >
+            Start practice
+          </Link>
+        </>
       )}
     </article>
   );
 }
-//这里先让卡片直接通往 practice。想保留 Level 详情页，也可以把链接改成：<Link href={`/learning/levels/${level.level}`}>View level</Link>

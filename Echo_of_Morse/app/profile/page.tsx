@@ -1,13 +1,12 @@
 import PageShell from "@/components/layout/page-shell";
+import Profile from "@/components/profile/profile-form";
 
 export default function ProfilePage() {
   return (
     <PageShell>
-      <h1>Profile</h1>
-      <p>This is the profile page.</p>
+      <Profile />
     </PageShell>
   );
 }
-//这是用户自己的profile页面
 
 // ! i18n: move profile page title and placeholder description into the i18n dictionary.

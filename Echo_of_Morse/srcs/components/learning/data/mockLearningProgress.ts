@@ -1,5 +1,22 @@
 import type { UserLearningProgress } from "@/types/learning";
 
+// TODO_BACKEND:
+//! Liyuan: Temporary mock data for the Learning module.
+// Replace this file with real user progress from:
+// GET /api/learning/progress
+//
+// Expected backend shape:
+// {
+//   currentLevel: number;
+//   unlockedLevels: number[];
+//   completedLevels: number[];
+//   globalAccuracy: number;
+//   averageReactionTime: number;
+//   totalSessions: number;
+//   todayLearningMinutes: number;
+//   weakCharacters: string[];
+// }
+
 export const mockLearningProgress: UserLearningProgress = {
   currentLevel: 3,
   unlockedLevels: [1, 2, 3],

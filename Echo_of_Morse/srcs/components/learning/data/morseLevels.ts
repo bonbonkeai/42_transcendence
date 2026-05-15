@@ -1,5 +1,23 @@
 import type { MorseLevel } from "@/types/learning";
 
+// TODO_BACKEND:
+//! Liyuan : Static mock level configuration for the Learning module.
+// This can remain frontend-side for the first version.
+// If levels are stored in the database later, replace this with:
+// GET /api/learning/levels
+//
+// Expected backend shape per level:
+// {
+//   level: number;
+//   title: string;
+//   newCharacters: string[];
+//   reviewFrom: string;
+//   newRatio: string;
+//   reviewRatio: string;
+//   questionCount: number;
+//   passCondition: string;
+// }
+
 export const morseLevels: MorseLevel[] = [
   {
     level: 1,
@@ -94,12 +112,53 @@ export const morseLevels: MorseLevel[] = [
   {
     level: 10,
     title: "Level 10",
-    newCharacters: ["All characters"],
+    newCharacters: [
+      ". .-.-.-",
+      ", --..--",
+      "? ..--..",
+      "! -.-.--",
+      "/ -..-.",
+      "- -....-",
+    ],
     reviewFrom: "Levels 1-9",
-    newRatio: "0% new",
-    reviewRatio: "100% review",
+    newRatio: "50% new",
+    reviewRatio: "50% review",
     questionCount: 30,
     passCondition: "≥ 75% (23/30)",
+  },
+  {
+    level: 11,
+    title: "Level 11",
+    newCharacters: [
+      "( -.--.",
+      ") -.--.-",
+      "& .-...",
+      ": ---...",
+      "; -.-.-.",
+      "= -...-",
+    ],
+    reviewFrom: "Levels 1-10",
+    newRatio: "50% new",
+    reviewRatio: "50% review",
+    questionCount: 30,
+    passCondition: "≥ 80% (24/30)",
+  },
+  {
+    level: 12,
+    title: "Level 12",
+    newCharacters: [
+      "+ .-.-.",
+      "- -....-",
+      "_ ..--.-",
+      '" .-..-.',
+      "$ ...-..-",
+      "@ .--.-.",
+    ],
+    reviewFrom: "Levels 1-11",
+    newRatio: "50% new",
+    reviewRatio: "50% review",
+    questionCount: 30,
+    passCondition: "≥ 80% (24/30)",
   },
 ];
 

@@ -18,7 +18,7 @@ export default function LearningEntryCards({
           <h2 className={styles.entryTitle}>Choose a level</h2>
 
           <p className={styles.cardText}>
-            View the 10 Morse levels and continue with an unlocked level.
+            View all Morse levels and continue with an unlocked level.
           </p>
         </div>
 
@@ -31,22 +31,29 @@ export default function LearningEntryCards({
         <div>
           <p className={styles.cardLabel}>Play</p>
 
-          <h2 className={styles.entryTitle}>Start practice</h2>
+          <h2 className={styles.entryTitle}>Review completed levels</h2>
 
           <p className={styles.cardText}>
-            Enter a mixed practice session from your current level.
+            Practice a random level you have already completed.
           </p>
         </div>
 
-        <Link
-          className={styles.secondaryButton}
-          href={`/learning/levels/${progress.currentLevel}/practice`}
-        >
-          Play Level {progress.currentLevel}
+        {/*
+          TODO_PLAY:
+          //! Liyuan: This button uses a stable route.
+          The random selection should happen inside /learning/play,
+          not inside this home page component.
+          Final behavior:
+          - /learning/play reads the current user's completedLevels.
+          - It randomly selects one completed level.
+          - It redirects to /learning/levels/[selectedLevel]/practice.
+          - If no level has been completed yet, it should show an empty state
+            or redirect to the current level.
+        */}
+        <Link className={styles.primaryButton} href="/learning/play">
+          Play
         </Link>
       </article>
     </section>
   );
 }
-
-//Math.random() 在服务端渲染时可能导致刷新后随机结果变化。如果你们之后遇到 hydration 问题，就把 Quick Practice 改成固定跳转-><Link href="/learning/levels">Choose a level</Link>
