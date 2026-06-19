@@ -1,5 +1,6 @@
 "use client";
 
+import { useI18n } from "@/lib/i18n";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useSocket } from "@/providers/socket-provider";
@@ -31,6 +32,17 @@ export default function RadioLobbyClient({
   radio,
   initialUsers,
 }: RadioLobbyClientProps) {
+	const { dictionary } = useI18n();
+	const t = dictionary.competitionRadio;
+
+	const radioNameById: Record<string, string> = {
+		"01": t.radioWave01,
+		"02": t.radioWave02,
+		"03": t.radioWave03,
+	};
+
+	const radioName = radioNameById[radio.radioId];
+
   const router = useRouter();
   const { socket } = useSocket();
 
@@ -84,7 +96,7 @@ export default function RadioLobbyClient({
         const body = (await response.json().catch(() => null)) as
           | { error?: string }
           | null;
-        throw new Error(body?.error || "Failed to load the radio lobby.");
+        throw new Error(body?.error || t.failedToLoadLobby);
       }
 
       const lobby = (await response.json()) as {
@@ -100,7 +112,7 @@ export default function RadioLobbyClient({
     requestLobby("POST").catch((error: unknown) => {
       if (!cancelled) {
         setMessage(
-          error instanceof Error ? error.message : "Failed to join the lobby."
+          error instanceof Error ? error.message : t.failedToJoinLobby
         );
       }
     });
@@ -183,7 +195,7 @@ export default function RadioLobbyClient({
       };
 
       if (!response.ok || !body.users) {
-        throw new Error(body.error || "Failed to update ready status.");
+        throw new Error(body.error || t.failedToUpdateReadyStatus);
       }
 
       applyLobbyResponse({
@@ -194,7 +206,7 @@ export default function RadioLobbyClient({
       setMessage(
         error instanceof Error
           ? error.message
-          : "Failed to update ready status."
+          : t.failedToUpdateReadyStatus
       );
     } finally {
       setIsUpdating(false);
@@ -203,12 +215,12 @@ export default function RadioLobbyClient({
 
   async function handleStartGame() {
     if (!isCurrentUserReady) {
-      setMessage("You need to click Ready before starting a game.");
+      setMessage(t.needReadyBeforeStart);
       return;
     }
 
     if (readyPlayers.length < 2) {
-      setMessage("Il faut au moins deux joueurs prêts pour commencer.");
+      setMessage(t.needTwoPlayers);
       return;
     }
 
@@ -226,7 +238,7 @@ export default function RadioLobbyClient({
       };
 
       if (!response.ok || !body.sessionId) {
-        throw new Error(body.error || "Failed to start the game.");
+        throw new Error(body.error || t.failedToStartGame);
       }
 
       router.push(
@@ -234,7 +246,7 @@ export default function RadioLobbyClient({
       );
     } catch (error) {
       setMessage(
-        error instanceof Error ? error.message : "Failed to start the game."
+        error instanceof Error ? error.message : t.failedToStartGame
       );
     } finally {
       setIsUpdating(false);
@@ -277,7 +289,7 @@ export default function RadioLobbyClient({
         <div className={styles.rightColumn}>
           <InviteFriendsPanel
             radioId={radio.radioId}
-            radioName={radio.name}
+            radioName={radioName}
             isLobbyFull={isLobbyFull}
           />
         </div>

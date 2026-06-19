@@ -1,5 +1,6 @@
 "use client";
 
+import { useI18n } from "@/lib/i18n";
 import { useEffect, useRef, useState } from "react";
 import { encode } from "@/lib/morse";
 
@@ -26,6 +27,10 @@ export default function GameSession({
 	sessionId,
 	speedWpm,
 }: GameSessionProps) {
+
+	const { dictionary } = useI18n();
+	const t = dictionary.competitionGame;
+
 	//arder une valeur sans relancer l’affichage de la page
 	const sequenceIndexRef = useRef(1);
 	//Date.now() ==> obtenir le temps actel en ms
@@ -51,8 +56,12 @@ export default function GameSession({
 	//-------------------- données pour aider à la gestion --------------------
 	const isFinished = secondsLeft <= 0;
 	const sequence = sessionData?.sequences ?? [];
+
+	//ranking: 
 	const leaderboard = [...players].sort((a, b) => b.score - a.score);
-	const winner = leaderboard[0];
+	const highestScore = leaderboard[0]?.score ?? 0;
+	//filter = garder seulement les elements qui respectent une condition
+	const winners = leaderboard.filter((player) => player.score === highestScore);
 
 	function resetStreak() {
 		setPlayers((currentPlayers) =>
@@ -79,7 +88,7 @@ export default function GameSession({
 				const firstSequence = data.sequences[0];
 
 				if (!firstSequence) {
-					throw new Error("This game session has no challenge sequences.");
+					throw new Error(t.noChallengeSequences);
 				}
 
 				if (cancelled) {
@@ -104,11 +113,7 @@ export default function GameSession({
 				setIsAnswerLocked(false);
 			} catch (error) {
 				if (!cancelled) {
-					setLoadError(
-						error instanceof Error
-							? error.message
-							: "Failed to load game session."
-					);
+					setLoadError(t.failedToLoadGameSession);
 				}
 			}
 		}
@@ -157,7 +162,7 @@ export default function GameSession({
 			})
 			.catch((error: unknown) => {
 				hasSubmittedResultRef.current = false;
-				console.error("Failed to save game result", error);
+				console.error(t.failedToSaveGameResult, error);
 			});
 	}, [isFinished, players, radioId, sessionData, sessionId]);
 
@@ -312,7 +317,7 @@ export default function GameSession({
 		return (
 			<section className={styles.shell}>
 				<section className={styles.gameArea}>
-					Loading game session...
+					{t.loadingGameSession}
 				</section>
 			</section>
 		);
@@ -324,7 +329,7 @@ export default function GameSession({
 			<FinalRanking
 				radioId={radioId}
 				players={leaderboard}
-				winner={winner}
+				winners={winners}
 			/>
 		</section>
 		);
@@ -333,14 +338,16 @@ export default function GameSession({
   return (
 
     <section className={styles.shell}>
-    	<Ranking players={leaderboard} />
+    	<Ranking 
+			players={leaderboard}
+		/>
 
 		<section className={styles.gameArea}>
 			{/* -------------------- titre -------------------- */}
 			<header className={styles.header}>
 				<div>
-					<p className={styles.eyebrow}>Radio Wave 0{radioId}</p>
-					<h1 className={styles.title}>{speedWpm} WPM Decode Session</h1>
+					<p className={styles.eyebrow}>{t.radioWaveTitle.replace("{radioId}", radioId)}</p>
+					<h1 className={styles.title}>{t.decodeSessionTitle.replace("{wpm}", String(speedWpm))}</h1>
 				</div>
 
 			{/* -------------------- temps -------------------- */}
@@ -354,7 +361,7 @@ export default function GameSession({
 					checked={showMorseText}
 					onChange={(event) => setShowMorseText(event.target.checked)}
 				/>
-				Show Morse text
+				{t.showMorseText}
 			</label>
 
 			<MorseStream

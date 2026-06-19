@@ -12,8 +12,6 @@ export type ChatMode =
   | "LANGUAGE_ONLY"
   | "morse-only"
   | "text-to-morse-only";
-//"morse-only"->If the user enters "Morse" directly, the system will not convert it
-//"text-to-morse-only"->When the user enters regular text, the system displays only Morse code
 
 export type Friend = {
   id: string;
@@ -25,6 +23,10 @@ export type Friend = {
   lastMessageAt: string;
   isOnline: boolean;
   image: string | null;
+  unreadCount?: number;
+  gameStatus?: "IDLE" | "READY" | "PLAYING" | null;
+  lobbyStatus?: "IDLE" | "READY" | "PLAYING" | null;
+  currentRadioId?: string | null;
 };
 
 export type ChatMessage = {
@@ -51,6 +53,17 @@ export type SystemMessage = {
   body: string;
   createdAt: string;
   isRead: boolean;
+  kind?: "info" | "game-invitation" | "join-lobby";
+  invitationId?: string;
+  fromUserId?: string;
+  radioId?: string;
+  actionStatus?:
+    | "idle"
+    | "updating"
+    | "accepted"
+    | "declined"
+    | "expired"
+    | "error";
 };
 
 export type ChatPanelView =

@@ -3,11 +3,18 @@ import CompetitionIntro from "@/components/competition/CompetitionHomePage/Compe
 import OnlineOverview from "@/components/competition/CompetitionHomePage/OnlineOverview";
 import RadioWaveCard from "@/components/competition/CompetitionHomePage/RadioWaveCard";
 import ReceivedInvitations from "@/components/competition/CompetitionHomePage/ReceivedInvitations";
+
+import RadioSectionHeader from "@/components/competition/CompetitionHomePage/RadioSectionHeader";
+import CompetitionHeader from "@/components/competition/CompetitionHomePage/CompetitionHeader";
 import {
   getOnlineOverview,
   getRadioConfigs,
 } from "@/lib/services/competition";
 import styles from "./competition.module.css";
+
+// Render this page at request time because it reads live Prisma data.
+// Static prerendering during Docker build cannot access the database.
+export const dynamic = "force-dynamic";
 
 export default async function CompetitionPage() {
   const [radios, overview] = await Promise.all([
@@ -18,9 +25,7 @@ export default async function CompetitionPage() {
   return (
     <main id="main-content">
       <PageShell>
-        <header className={styles.hero}>
-          <h1 className={styles.title}>Competition</h1>
-        </header>
+        <CompetitionHeader />
 
         <section className={styles.topGrid}>
           <OnlineOverview overview={overview} />
@@ -30,16 +35,7 @@ export default async function CompetitionPage() {
         <ReceivedInvitations />
 
         <section className={styles.radioSection} aria-labelledby="radio-waves">
-          <div className={styles.sectionHeader}>
-            <div>
-              <h2 id="radio-waves" className={styles.sectionTitle}>
-                Radio Waves
-              </h2>
-              <p className={styles.sectionDescription}>
-                Choose a transmission speed and join its live lobby.
-              </p>
-            </div>
-          </div>
+          <RadioSectionHeader />
 
           <div className={styles.radioGrid}>
             {radios.map((radio) => (

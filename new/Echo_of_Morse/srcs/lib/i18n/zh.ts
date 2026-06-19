@@ -40,6 +40,7 @@ const zh = {
 		updateProfileError: "更新个人资料时出现错误。",
 	},
 
+	//=========================================== register =========================================== 
 	register: {
 		title: "注册",
 		description: "创建你的账号以使用平台功能。",
@@ -62,6 +63,11 @@ const zh = {
 		success: "账号创建成功，正在跳转到登录页面...",
 		genericError: "注册时出现错误，请稍后再试。",
 		usernameOrEmailInUse: "用户名或邮箱已被使用。",
+
+		showPassword: "显示",
+		hidePassword: "隐藏",
+
+		emailInvalid: "邮箱格式不正确。",
 	},
 
 	layout: {
@@ -209,12 +215,13 @@ const zh = {
 		learningOptions: "学习选项",
 		levels: "等级",
 		chooseLevel: "选择等级",
-		levelsDescription: "查看所有摩斯码等级，并继续一个已解锁的等级。",
+		levelsDescription: "查看摩斯码练习等级，并选择已解锁的等级开始练习。",
 		openLevels: "打开等级列表",
 
-		play: "练习",
-		reviewCompletedLevels: "复习已完成等级",
-		playDescription: "随机练习一个你已经完成的等级。",
+		review: "复习",
+		reviewDueCharacters: "复习薄弱字符",
+		reviewDescription: "根据练习结果，选出准确率较低的字符进行复习。",
+		startReview: "开始复习",
 
 		
 		//------------------ app/learning/levels/page.tsx ------------------
@@ -231,10 +238,42 @@ const zh = {
 		newCharacters: "新字符",
 		questions: "题目",
 		pass: "通过",
-		review: "复习",
 		locked: "未解锁",
 		startPractice: "开始练习",
 
+		completed: "已完成",
+		current: "当前",
+		unlocked: "已解锁",
+
+		//------------------ srcs/components/learning/LetterProgressPreview.tsx------------------
+		letterProgressLabel: "字符进度",
+		letterProgressTitle: "每个字符的正确率",
+		letterProgressDescription: "每根柱子表示一个字符的正确率。较弱的字符会排在前面。",
+		letterProgressScrollHint: "横向滚动以查看所有字符。",
+		successRate: "正确率",
+		correct: "正确",
+		wrong: "错误",
+	},
+
+	learningReview: {
+		title: "复习",
+		noProgressDescription: "请先完成一些等级练习，系统才能建立你的复习计划。",
+
+		loading: "正在准备复习题目...",
+		unavailable: "暂时无法复习",
+		loadError: "无法加载复习内容。",
+		saveError: "无法保存复习结果。",
+		noProgressTitle: "暂时没有可复习的字符",
+		
+		openLevels: "打开等级列表",
+		sessionSummary: "目前有 {dueCount} 个待复习字符，本次优先复习 {reviewedCharacters} 个字符。",
+		
+		tryAgain: "重试",
+		reviewComplete: "复习完成",
+		reviewResultSummary: "你答对了 {correctCount} / {questionCount} 题。",
+		accuracy: "准确率",
+		reviewAgain: "再次复习",
+		backToLearning: "返回学习主页",
 	},
 
 	//=========================================== chat =========================================== 
@@ -303,7 +342,404 @@ const zh = {
 		pageTitle: "聊天",
 		pageDescription: "这个页面将用于实时聊天和交流功能。",
 	},
+
+	//=========================================== login =========================================== 
+	login: {
+		title: "登录",
+		description: "登录以继续使用你的账号。",
+
+		email: "邮箱",
+		password: "密码",
+		emailPlaceholder: "请输入邮箱",
+		passwordPlaceholder: "请输入密码",
+
+		emailRequired: "邮箱不能为空。",
+		passwordRequired: "密码不能为空。",
+
+		invalidCredentials: "邮箱或密码不正确。",
+		success: "登录成功。",
+		genericError: "登录时出现错误。",
+
+		submitting: "提交中...",
+		loginButton: "登录",
+
+		loginWithGoogle: "Google 登录",
+		loginWithFortyTwo: "42 登录",
+
+		noAccount: "还没有账号？",
+		registerHere: "点击这里注册",
+
+		showPassword: "显示",
+		hidePassword: "隐藏",
+	},
+
+	//=========================================== privacyPolicy =========================================== 
+	privacyPolicy: {
+		title: "隐私政策",
+		effectiveDate: "生效日期：[10/07/2026]",
+		sections: [
+			{
+				title: "1. 介绍",
+				paragraphs: [
+					"欢迎使用 摩斯之声。摩斯之声 是一个用于学习摩斯码、参加比赛并与其他用户交流的平台。本隐私政策说明 Morse Team 如何在你使用平台时收集、使用、保存和保护你的个人数据。",
+					"使用 摩斯之声 即表示你同意本政策中描述的做法。",
+				],
+				items: [],
+			},
+			{
+				title: "2. 数据控制方",
+				paragraphs: ["Morse Team — morseteam@42.fr"],
+				items: [],
+			},
+			{
+				title: "3. 我们收集的数据",
+				paragraphs: [
+					"账号信息：注册账号时，我们会收集你的用户名和邮箱地址。你的密码会被加密保存，我们不会保存明文密码。",
+					"第三方账号信息：当你绑定 Google 或 42 账号时，我们可能会接收你的用户名、邮箱地址和头像。",
+					"私聊消息：通过私聊功能发送的消息会在你的账号存在期间保存在数据库中。",
+				],
+				items: [
+					"学习进度和练习结果",
+					"比赛记录和分数",
+					"排行榜排名",
+					"IP 地址、浏览器类型和操作系统",
+					"会话和连接时间",
+				],
+			},
+			{
+				title: "4. 我们如何使用你的数据",
+				paragraphs: [
+					"我们使用你的数据来提供账号登录、学习进度记录、比赛功能、排行榜、好友和聊天功能，并维护平台安全。",
+					"我们不会发送营销邮件，也不会将你的数据用于广告目的。",
+				],
+				items: [],
+			},
+			{
+				title: "5. 第三方服务",
+				paragraphs: [
+					"我们使用 Google OAuth 和 42 OAuth 进行第三方账号绑定或登录。这些服务可能会根据它们自己的隐私政策收集数据。",
+					"我们不会向第三方出售你的个人数据。",
+				],
+				items: [],
+			},
+			{
+				title: "6. 私聊和内容管理",
+				paragraphs: [
+					"私聊消息会在你的账号存在期间被保存。如果发生违规举报，平台管理员可能会查看相关聊天内容以进行管理。",
+					"请不要在聊天中分享敏感个人信息。",
+				],
+				items: [],
+			},
+			{
+				title: "7. 数据保存",
+				paragraphs: [
+					"只要你的账号处于有效状态，我们会保存你的数据。账号删除后，你的个人资料和消息会被删除。",
+					"比赛数据可能会以匿名形式保留，用于统计目的。",
+				],
+				items: [],
+			},
+			{
+				title: "8. 你的权利",
+				paragraphs: [
+					"作为欧盟用户，你有权访问、更正、删除、限制处理或导出你的个人数据。你可以通过 morseteam@42.fr 联系我们行使这些权利。",
+					"我们会在 30 天内回复。你也可以向所在国家的数据保护机构提出投诉。",
+				],
+				items: [],
+			},
+			{
+				title: "9. 数据安全",
+				paragraphs: [
+					"我们使用加密密码存储、第三方登录和访问控制来保护你的数据。",
+					"没有任何系统是绝对安全的。我们建议你使用强密码，并保护好你的第三方账号。",
+				],
+				items: [],
+			},
+			{
+				title: "10. 儿童隐私",
+				paragraphs: [
+					"摩斯之声 不面向 13 岁以下儿童。如果你认为有儿童向我们提供了个人数据，请联系我们，我们会尽快删除相关数据。",
+				],
+				items: [],
+			},
+			{
+				title: "11. 政策变更",
+				paragraphs: [
+					"我们可能会不时更新本隐私政策。政策更新后继续使用平台，即表示你接受更新后的政策。",
+				],
+				items: [],
+			},
+			{
+				title: "12. 联系方式",
+				paragraphs: ["Morse Team — morseteam@42.fr"],
+				items: [],
+			},
+		],
+	},
+
+	//=========================================== termsOfService =========================================== 
+	termsOfService: {
+		title: "服务条款",
+		effectiveDate: "生效日期：[10/07/2026]",
+		sections: [
+			{
+				title: "1. 介绍",
+				paragraphs: [
+					"欢迎使用 摩斯之声。本服务条款适用于你对本平台的使用，包括摩斯码学习工具、比赛、排行榜、好友和消息功能。",
+					"访问或使用 摩斯之声 即表示你同意本条款。如果你不同意，请不要使用本平台。",
+				],
+				items: [],
+			},
+			{
+				title: "2. 使用资格",
+				paragraphs: [
+					"你必须年满 13 岁才能使用本平台。使用 摩斯之声 即表示你确认自己符合该要求。",
+				],
+				items: [],
+			},
+			{
+				title: "3. 用户账号",
+				paragraphs: [
+					"使用平台功能需要创建账号，或使用已绑定的第三方账号登录。",
+					"你需要负责维护账号安全，并对账号下发生的所有活动负责。",
+				],
+				items: [],
+			},
+			{
+				title: "4. 可接受的使用方式",
+				paragraphs: ["你同意不会进行以下行为："],
+				items: [
+					"将平台用于非法目的",
+					"尝试攻击、破坏或过载平台服务",
+					"在比赛中作弊或操纵排行榜",
+					"发送辱骂、攻击性或有害消息",
+					"冒充其他用户或组织",
+				],
+			},
+			{
+				title: "5. 比赛和排行榜",
+				paragraphs: [
+					"摩斯之声 提供比赛和排行榜功能，用于学习和娱乐目的。",
+					"如果出现作弊、滥用或技术问题，我们保留删除分数、暂停账号或重置排名的权利。",
+				],
+				items: [],
+			},
+			{
+				title: "6. 私聊消息",
+				paragraphs: [
+					"用户可以通过私聊功能进行交流。你需要对自己发送的内容负责。",
+					"如果内容违反本条款或适用法律，我们保留管理或删除相关内容的权利。",
+				],
+				items: [],
+			},
+			{
+				title: "7. 知识产权",
+				paragraphs: [
+					"除非另有说明，平台内容、设计、标志和学习材料属于 Morse Team。",
+					"未经许可，你不得复制、重新分发或商业使用平台内容。",
+				],
+				items: [],
+			},
+			{
+				title: "8. 服务可用性",
+				paragraphs: [
+					"我们会尽力保持平台可用，但不保证服务永远不中断。",
+					"平台可能会在没有提前通知的情况下被修改、暂停或停止。",
+				],
+				items: [],
+			},
+			{
+				title: "9. 责任限制",
+				paragraphs: [
+					"摩斯之声 按现状提供，不作任何形式的保证。",
+					"Morse Team 不对因使用平台导致的数据丢失、服务中断或其他损害承担责任。",
+				],
+				items: [],
+			},
+			{
+				title: "10. 账号终止",
+				paragraphs: [
+					"如果账号违反本条款或威胁平台安全，我们保留暂停或终止该账号的权利。",
+				],
+				items: [],
+			},
+			{
+				title: "11. 条款变更",
+				paragraphs: [
+					"我们可能会不时更新本服务条款。条款更新后继续使用平台，即表示你接受更新后的条款。",
+				],
+				items: [],
+			},
+			{
+				title: "12. 联系方式",
+				paragraphs: ["Morse Team — morseteam@42.fr"],
+				items: [],
+			},
+		],
+	},
+
+	//=========================================== competition =========================================== 
+	competitionHome: {
+		//--------- CompetitionHeader ---------
+		pageTitle: "比赛",
+
+		//--------- RadioSectionHeader ---------
+		radioWaves: "无线电频道",
+		radioWavesDescription: "选择一个传输速度，并进入对应的实时大厅。",
+
+		//--------- CompetitionIntro.tsx ---------
+		rules: "规则",
+		rulesList: [
+			"根据你的摩斯码水平选择一个无线电大厅。",
+			"每个无线电大厅最多容纳 {maxUsers} 名玩家。",
+			"点击准备，加入该频道的匹配队列。",
+			"当至少两名玩家准备好后，可以开始游戏。",
+			"所有准备好的玩家会实时接收相同的摩斯码序列。",
+			"计时结束时，分数最高的玩家获胜。",
+		],
+
+		//--------- OnlineOverview.tsx ---------
+		onlineOverview: "在线概览",
+		onlineNow: "当前在线",
+		liveDataConnected: "实时数据已连接。",
+		disconnectedSnapshot: "连接已断开，正在显示数据库快照。",
+
+		radioWave01: "无线电频道 01",
+		radioWave02: "无线电频道 02",
+		radioWave03: "无线电频道 03",
+
+		//--------- RadioWaveCard.tsx ---------
+		usersInside: "{count}/{maxUsers} 位用户在房间内",
+
+		full: "已满",
+		enter: "进入",
+
+		lobbyFullAria: "{radioName}，{wpm} WPM，大厅已满",
+		enterRadioAria: "进入 {radioName}，{wpm} WPM，{capacity}",
+
+		radioWave01Description: "适合摩斯码初学者的较慢传输速度。",
+		radioWave02Description: "适合中级玩家的平衡传输速度。",
+		radioWave03Description: "适合熟练解码者的高速传输速度。",
+
+		//--------- ReceivedInvitations.tsx ---------
+		failedToAnswerInvitation: "处理邀请失败。",
+
+		gameInvitations: "游戏邀请",
+
+		invitedYouTo: "邀请你加入 {radioName}。你有 1 分钟接受邀请，之后邀请会过期。",
+		unknownRadioLobby: "一个无线电大厅",
+
+		accept: "接受",
+		decline: "拒绝",
+	},
+
+	competitionRadio: {
+		//--------- RadioHeader.tsx ---------
+		backToCompetition: "← 返回比赛页",
+		radioLobby: "无线电大厅",
+		lobbyDescription: "{description} 这个大厅中的玩家可以加入准备队列，并一起开始实时摩斯码解码游戏。",
+		radioInformation: "无线电信息",
+		speed: "速度",
+		usersInside: "房间人数",
+
+		//--------- LobbyUserList.tsx ---------
+		usersInThisRadio: "当前频道用户",
+
+		seatsTaken: "{count}/{maxUsers} 个位置已占用。",
+		statusExplanation: "灰色表示仅在大厅中，绿色表示已准备，黄色表示游戏中。",
+		
+		lobbyFull: "这个大厅已满。",
+		inLobby: "在大厅中",
+		ready: "准备",
+		playing: "游戏中",
+		
+		you: "你",
+		avatarAlt: "{displayName} 的头像",
+
+		//--------- MatchmakingPanel.tsx ---------
+		matchmakingQueue: "匹配队列",
+		matchmakingDescription: "加入这个频道的队列。当至少两名玩家准备好后，任意已准备玩家都可以开始解码游戏。",
+		cancelReady: "取消准备",
+		startDecoding: "开始解码",
+
+		currentReadyPlayers: "当前准备玩家:",
+		currentReadyPoint: "。 ",
+		requiredReadyPlayersPrefix: "至少需要",
+		requiredReadyPlayersSuffix: "名准备玩家才能开始。",
+
+		//--------- ReadyPlayersList.tsx ---------
+		readyPlayers: "已准备玩家",
+		readyPlayersDescription: "这些玩家会一起进入下一场游戏。",
+		noReadyPlayers: "还没有玩家准备。点击准备加入队列。",
+
+		//--------- InviteFriendsPanel.tsx ---------
+		inviteFriends: "邀请好友",
+		inviteFriendsDescription: "邀请在线好友加入 {radioName}。邀请会把他们带到这个大厅，而不是直接进入游戏。",
+		loadingOnlineFriends: "正在加载在线好友...",
+		
+		noOnlineFriend: "现在没有在线好友可邀请。",
+		signInToInvite: "请先登录以邀请在线好友。",
+		
+		onlineFriend: "在线好友",
+		invited: "已邀请",
+		invite: "邀请",
+		lobbyFullInviteClosed: "{radioName} 已满，暂时无法发送新的邀请。",
+		inviteHint: "邀请会保存在数据库中，并跳转到当前无线电大厅。",
+
+		//--------- RadioWavePickerModal.tsx ---------
+		chooseRadioWave: "选择无线电频道",
+		inviteToRadioLobby: "邀请 {displayName} 加入一个无线电大厅。",
+		closeRadioSelection: "关闭无线电选择",
+		cancel: "取消",
+		radioWave01: "无线电频道 01",
+		radioWave02: "无线电频道 02",
+		radioWave03: "无线电频道 03",
+		radioWave01Description: "适合摩斯码初学者的较慢传输速度。",
+		radioWave02Description: "适合中级玩家的平衡传输速度。",
+		radioWave03Description: "适合熟练解码者的高速传输速度。",
+
+		//--------- RadioLobbyClient.tsx ---------
+		failedToLoadLobby: "加载无线电大厅失败。",
+		failedToJoinLobby: "加入大厅失败。",
+		failedToAnswerInvitation: "处理邀请失败。",
+		failedToUpdateReadyStatus: "更新准备状态失败。",
+		needReadyBeforeStart: "你需要先点击准备才能开始游戏。",
+		needTwoPlayers: "至少需要两名准备玩家才能开始。",
+		failedToStartGame: "开始游戏失败。",
+		failedToFetchFriends: "加载好友失败。",
+		failedToSendInvitation: "发送邀请失败。",
+	},
+
+	competitionGame: {
+		//--------- gameSession.tsx ---------
+		noChallengeSequences: "这个游戏目前没有可用题目。",
+		failedToLoadGameSession: "加载游戏失败。",
+		failedToSaveGameResult: "保存游戏结果失败。",
+		
+		loadingGameSession: "正在加载游戏...",
+		radioWaveTitle: "无线电频道 {radioId}",
+		decodeSessionTitle: "{wpm} WPM 解码",
+		showMorseText: "显示摩斯文本",
+
+		//--------- answer.tsx ---------
+		morseScrollHint: "可使用键盘左/右箭头或鼠标，滑动查看完整内容。",
+		hidden: "已隐藏",
+
+		//--------- answer.tsx ---------
+		answerPlaceholder: "在此输入你的解码结果...",
+
+		//--------- ranking.tsx ---------
+		ranking: "排行榜",
+		rank: "排名",
+		player: "玩家",
+		score: "分数",
+		accuracySymbol: "%",
+
+		//--------- finalRanking.tsx ---------
+		winner: "获胜者",
+		tie: "平局",
+		backToRadioLobby: "返回无线电大厅",
+	},
+
 };
 
 export default zh;
-
