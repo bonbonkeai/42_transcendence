@@ -443,8 +443,7 @@ export default function OnlineFriendsPreview() {
       await sendGameInvitation({
         toUserId: invited.id,
         radioId,
-        joinLobbyBeforeSend: false,
-        redirectAfterSend: false,
+        redirectAfterSend: true,
       });
 
       markFriendAsPending(invited.id);
